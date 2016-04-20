@@ -1,0 +1,43 @@
+package com.system.dao.impl;
+
+import com.system.dao.HospitalDao;
+import com.system.entity.Hospital;
+import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+
+/**
+ * Created by king on 2016/4/20.
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring.xml","classpath:spring-hibernate.xml" })
+public class TestHospitalDaoImpl {
+
+    private static final Logger LOGGER = Logger.getLogger(TestHospitalDaoImpl.class);
+
+    @Autowired
+    private HospitalDao hospitalDao;
+
+    @Test
+    public void testSave(){
+        String name = "华工大医院";
+        String address= "华南理工大学";
+        String telephone = "123456789";
+        Hospital entity = new Hospital(name,address,telephone);
+        int index = hospitalDao.save(entity);
+        LOGGER.info("成功保存"+index);
+    }
+
+    @Test
+    public void testFindAll(){
+        List<Hospital> hospitalList = hospitalDao.findAll();
+        for(Hospital hospital : hospitalList){
+            LOGGER.info(hospital);
+        }
+    }
+}

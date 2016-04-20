@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 指定由spring负责action对象的创建 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 是否启用开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 请求参数的编码方式 -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<!-- 每次HTTP请求系统都重新加载资源文件，有助于开发 -->
+	<constant name="struts.i18n.reload" value="true" />
+
+	<!-- 以下配置是实现concention -->
+	<!-- 进行扫描的根包，该包会被扫描成action -->
+	<constant name="struts.convention.action.packages" value="com.king.system.action" />
+	<!-- 返回页面地址 -->
+	<constant name="struts.convention.result.path" value="/WEB-INF/pages/" />
+	<!-- 用于进行action查找的后缀 -->
+	<constant name="struts.convention.action.suffix" value="Action" />
+	<!-- 返回页面类型 -->
+	<constant name="struts.convention.relative.result.types" value="dispatcher" />
+	<!-- 开启动态调用函数，这个方法在struts2里面不推荐，可是在这里却可以实现动态方法的调用，不用自写action了 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	
+
+</struts>
