@@ -40,7 +40,7 @@ public class Hospital implements Serializable{
     @Column(name = "type")
     private int type;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinColumn(name = "hid")
     private Set<Office> officeSet;
 
@@ -134,6 +134,14 @@ public class Hospital implements Serializable{
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public Set<Office> getOfficeSet() {
+        return officeSet;
+    }
+
+    public void setOfficeSet(Set<Office> officeSet) {
+        this.officeSet = officeSet;
     }
 
     @Override

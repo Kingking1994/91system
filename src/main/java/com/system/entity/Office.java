@@ -25,11 +25,10 @@ public class Office implements Serializable {
     @Column(name = "level")
     private int level;
 
-    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-    @JoinColumn(name = "hid")
-    private Hospital hospital;
+    @Column(name = "hid",nullable = false)
+    private int hid;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinColumn(name = "oid")
     private Set<Doctor> doctorSet;
 
@@ -74,12 +73,12 @@ public class Office implements Serializable {
         this.level = level;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    public int getHid() {
+        return hid;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setHid(int hid) {
+        this.hid = hid;
     }
 
     public Set<Doctor> getDoctorSet() {
@@ -93,7 +92,8 @@ public class Office implements Serializable {
     @Override
     public String toString() {
         return "Office{" +
-                "oid=" + oid +
+                "hid=" + hid +
+                ", oid=" + oid +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", level=" + level +
