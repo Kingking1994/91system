@@ -1,8 +1,12 @@
 package com.system.dao.impl;
 
 import com.system.dao.HospitalDao;
+import com.system.dao.OfficeDao;
+import com.system.entity.Doctor;
 import com.system.entity.Hospital;
+import com.system.entity.Office;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by king on 2016/4/20.
@@ -22,6 +27,7 @@ public class TestHospitalDaoImpl {
 
     @Autowired
     private HospitalDao hospitalDao;
+
 
     @Test
     public void testSave(){
@@ -38,6 +44,19 @@ public class TestHospitalDaoImpl {
         List<Hospital> hospitalList = hospitalDao.findAll();
         for(Hospital hospital : hospitalList){
             LOGGER.info(hospital);
+        }
+    }
+
+    @Test
+    public void testGet(){
+        Hospital hospital = hospitalDao.get(1);
+        LOGGER.info(hospital);
+        Set<Office> officeSet = hospital.getOfficeSet();
+        if (!officeSet.isEmpty()){
+            for(Office office : officeSet){
+                LOGGER.info(office);
+
+            }
         }
     }
 }
