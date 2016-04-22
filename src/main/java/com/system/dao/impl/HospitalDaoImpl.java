@@ -55,4 +55,28 @@ public class HospitalDaoImpl implements HospitalDao {
     public void flush() {
         this.getCurrentSession().flush();
     }
+
+    public List<Hospital> findByQuality(int quality) {
+        String hql = "from Hospital h where h.quality = " + quality;
+        List<Hospital> hospitalList = this.getCurrentSession().createQuery(hql).list();
+        return hospitalList;
+    }
+
+    public List<Hospital> findByRegion(int region) {
+        String hql = "from Hospital h where h.region = " + region;
+        List<Hospital> hospitalList = this.getCurrentSession().createQuery(hql).list();
+        return hospitalList;
+    }
+
+    public List<Hospital> findByLevel(int level) {
+        String hql = "from Hospital h where h.level = " + level;
+        List<Hospital> hospitalList = this.getCurrentSession().createQuery(hql).list();
+        return hospitalList;
+    }
+
+    public List<Hospital> findByType(int type) {
+        String hql = "from Hospital h where h.type = " + type;
+        List<Hospital> hospitalList = this.getCurrentSession().createQuery(hql).list();
+        return hospitalList;
+    }
 }

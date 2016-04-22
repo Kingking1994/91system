@@ -56,4 +56,16 @@ public class OfficeDaoImpl implements OfficeDao{
     public void flush() {
         this.getCurrentSession().flush();
     }
+
+    public List<Office> findByType(int type) {
+        String hql = "from Office o where o.type = " + type;
+        List<Office> officeList = this.getCurrentSession().createQuery(hql).list();
+        return officeList;
+    }
+
+    public List<Office> findByLevel(int level) {
+        String hql = "from Office o where o.level = " + level;
+        List<Office> officeList = this.getCurrentSession().createQuery(hql).list();
+        return officeList;
+    }
 }

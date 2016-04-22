@@ -56,4 +56,16 @@ public class DoctorDaoImpl implements DoctorDao {
     public void flush() {
         this.getCurrentSession().flush();
     }
+
+    public List<Doctor> findByGender(int gender) {
+        String hql = "from Doctor d where d.gender = " + gender;
+        List<Doctor> doctorList = this.getCurrentSession().createQuery(hql).list();
+        return doctorList;
+    }
+
+    public List<Doctor> findByTitle(int title) {
+        String hql = "from Doctor d where d.title = " + title;
+        List<Doctor> doctorList = this.getCurrentSession().createQuery(hql).list();
+        return doctorList;
+    }
 }

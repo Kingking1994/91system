@@ -6,4 +6,6 @@ import com.system.entity.UserInfo;
  * Created by king on 2016/4/21.
  */
 public interface UserInfoDao extends GenericDao<UserInfo,Integer> {
+
+    UserInfo findByPhone(String phone);
 }
