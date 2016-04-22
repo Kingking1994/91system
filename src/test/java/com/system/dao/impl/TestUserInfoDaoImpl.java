@@ -34,4 +34,10 @@ public class TestUserInfoDaoImpl extends GenericTest {
 
         userInfoDao.save(userInfo);
     }
+
+    @Test
+    public void testFindByPhone(){
+        UserInfo userInfo = userInfoDao.findByPhone("18814122697");
+        LOGGER.info(userInfo);
+    }
 }

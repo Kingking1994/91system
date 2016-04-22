@@ -5,6 +5,7 @@ import com.system.dao.OfficeDao;
 import com.system.entity.Doctor;
 import com.system.entity.Hospital;
 import com.system.entity.Office;
+import com.system.util.CollectionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.junit.Test;
@@ -56,6 +57,17 @@ public class TestHospitalDaoImpl {
             for(Office office : officeSet){
                 LOGGER.info(office);
 
+            }
+        }
+    }
+
+
+    @Test
+    public void testFindByQuality(){
+        List<Hospital> hospitalList = hospitalDao.findByQuality(1);
+        if(CollectionUtil.isNotEmpty(hospitalList)){
+            for (Hospital hospital : hospitalList){
+                LOGGER.info(hospital);
             }
         }
     }

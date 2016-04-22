@@ -32,4 +32,10 @@ public class TestUserDaoImpl extends GenericTest{
         UserInfo userInfo = user.getUserInfo();
         LOGGER.info(userInfo);
     }
+
+    @Test
+    public void testFindByPhone(){
+        User user = userDao.findByPhone("18814122697");
+        LOGGER.info(user);
+    }
 }
