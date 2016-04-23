@@ -8,39 +8,42 @@ public enum OfficeLevelEnum {
     /**
      * 普通
      */
-    PUTONG(0),
+    PUTONG("普通",0),
 
     /**
-     * 国家
+     * 国级
      */
-    GUOJIA(1),
+    GUOJI("国级",1),
 
     /**
      * 省级
      */
-    SHENGJI(2),
+    SHENGJI("省级",2),
 
     /**
      * 市级
      */
-    SHIJI(3),
+    SHIJI("市级",3),
 
     /**
      * 区级
      */
-    QUJI(4)
+    QUJI("区级",4)
 
     ;
-    int value;
+    private String name;
+    private int index;
 
-    OfficeLevelEnum(int value) {
-        this.value = value;
+    OfficeLevelEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "OfficeLevelEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

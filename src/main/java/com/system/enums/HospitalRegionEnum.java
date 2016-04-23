@@ -9,68 +9,70 @@ public enum HospitalRegionEnum {
     /**
      * 海珠区
      */
-    HAIZHU(1),
+    HAIZHU("海珠区",1),
 
     /**
      * 荔湾区
      */
-    LIWAN(2),
+    LIWAN("荔湾区",2),
 
     /**
      * 天河区
      */
-    TIANHE(3),
+    TIANHE("天河区",3),
 
     /**
      * 番禺区
      */
-    PANYU(4),
+    PANYU("番禺区",4),
 
     /**
      * 白云区
      */
-    BAIYUN(5),
+    BAIYUN("白云区",5),
 
     /**
      * 黄浦区
      */
-    HUANGPU(6),
+    HUANGPU("黄浦区",6),
 
     /**
      * 花都区
      */
-    HUADU(7),
+    HUADU("花都区",7),
 
     /**
      * 增城区
      */
-    ZENGCHENG(8),
+    ZENGCHENG("增城区",8),
 
     /**
      * 越秀区
      */
-    YUEXIU(9),
+    YUEXIU("越秀区",9),
 
     /**
      * 其他
      */
-    QITA(0)
+    QITA("其他",0)
 
 
     ;
 
 
+    private String name;
+    private int index;
 
-    int value;
-
-    HospitalRegionEnum(int value) {
-        this.value = value;
+    HospitalRegionEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "HospitalRegionEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

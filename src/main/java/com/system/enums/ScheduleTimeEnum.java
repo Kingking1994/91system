@@ -8,25 +8,29 @@ public enum ScheduleTimeEnum {
     /**
      * 上午
      */
-    SHANGWU(0),
+    SHANGWU("上午",0),
 
     /**
      * 下午
      */
-    XIAWU(1)
+    XIAWU("上午",1)
 
     ;
 
-    int value;
+    private String name;
 
-    ScheduleTimeEnum(int value) {
-        this.value = value;
+    private int index;
+
+    ScheduleTimeEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "ScheduleTimeEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

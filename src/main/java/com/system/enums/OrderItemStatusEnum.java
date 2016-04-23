@@ -8,24 +8,27 @@ public enum OrderItemStatusEnum {
     /**
      * 成功预约
      */
-    SUCCESS(0),
+    SUCCESS("成功预约",0),
 
     /**
      * 已取消
      */
-    CANCEL(1)
+    CANCEL("已取消",1)
 
     ;
-    int value;
+    private String name;
+    private int index;
 
-    OrderItemStatusEnum(int value) {
-        this.value = value;
+    OrderItemStatusEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "OrderItemStatusEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

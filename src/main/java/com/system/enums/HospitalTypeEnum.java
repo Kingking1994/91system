@@ -8,21 +8,24 @@ public enum HospitalTypeEnum {
     /**
      * 其他
      */
-    QITA(0)
+    QITA("其他",0)
 
 
     ;
 
-    int value;
+    private String name;
+    private int index;
 
-    HospitalTypeEnum(int value) {
-        this.value = value;
+    HospitalTypeEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "HospitalTypeEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

@@ -9,21 +9,26 @@ public enum HospitalQualityEnum {
     /**
      * 公立医院
      */
-    GONGLI(0),
+    GONGLI("公立医院",0),
 
     /**
      * 私立医院
      */
-    SILI(1);
+    SILI("私立医院",1);
 
-    int value;
+    private String name;
+    private int index;
 
-    HospitalQualityEnum(int value){ this.value = value; }
+    HospitalQualityEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
 
     @Override
     public String toString() {
         return "HospitalQualityEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

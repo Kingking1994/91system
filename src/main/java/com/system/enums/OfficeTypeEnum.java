@@ -9,21 +9,24 @@ public enum OfficeTypeEnum {
     /**
      * 其她
      */
-    QITA(0)
+    QITA("其她",0)
 
 
     ;
 
-    int value;
+    private String name;
+    private int index;
 
-    OfficeTypeEnum(int value) {
-        this.value = value;
+    OfficeTypeEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "OfficeTypeEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

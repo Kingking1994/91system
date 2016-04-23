@@ -6,31 +6,34 @@ package com.system.enums;
 public enum UserInfoMarriedEnum {
 
     /**
-     * 其她
+     * 其他
      */
-    QITA(0),
+    QITA("其他",0),
 
     /**
      * 否
      */
-    NO(1),
+    NO("否",1),
 
     /**
      * 是
      */
-    YES(2)
+    YES("是",2)
     ;
 
-    int value;
+    private String name;
+    private int index;
 
-    UserInfoMarriedEnum(int value) {
-        this.value = value;
+    UserInfoMarriedEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "UserInfoMarriedEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

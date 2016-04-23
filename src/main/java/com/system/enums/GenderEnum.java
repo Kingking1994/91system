@@ -8,25 +8,28 @@ public enum GenderEnum {
     /**
      * 男性
      */
-    MALE(0),
+    MALE("男",0),
 
     /**
      * 女性
      */
-    FEMALE(1)
+    FEMALE("女",1)
 
 
     ;
-    int value;
+    private String name;
+    private int index;
 
-    GenderEnum(int value) {
-        this.value = value;
+    GenderEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "GenderEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

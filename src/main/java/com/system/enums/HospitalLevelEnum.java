@@ -8,45 +8,48 @@ public enum HospitalLevelEnum {
     /**
      * 其他
      */
-    QITA(0),
+    QITA("其他",0),
 
     /**
      * 特等
      */
-    TEDENG(1),
+    TEDENG("特等",1),
 
     /**
      * 三甲
      */
-    SANJIA(2),
+    SANJIA("三甲",2),
 
     /**
      * 三级
      */
-    SANJI(3),
+    SANJI("三级",3),
 
     /**
      * 二级
      */
-    ERJI(4),
+    ERJI("二级",4),
 
     /**
      * 一级
      */
-    YIJI(5)
+    YIJI("一级",5)
 
 
     ;
-    int value;
+    private String name;
+    private int index;
 
-    HospitalLevelEnum(int value) {
-        this.value = value;
+    HospitalLevelEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "HospitalLevelEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

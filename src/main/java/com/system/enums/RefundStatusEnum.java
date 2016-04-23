@@ -7,29 +7,33 @@ public enum RefundStatusEnum {
     /**
      * 成功退款
      */
-    SUCCESS(0),
+    SUCCESS("成功退款",0),
 
     /**
      * 已取消
      */
-    CANCEL(1),
+    CANCEL("已取消",1),
 
     /**
      * 正在处理
      */
-    DOING(2)
+    DOING("正在处理",2)
 
     ;
-    int value;
+    private String name;
 
-    RefundStatusEnum(int value) {
-        this.value = value;
+    private int index;
+
+    RefundStatusEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "RefundStatusEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

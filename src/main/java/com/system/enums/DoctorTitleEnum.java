@@ -8,29 +8,32 @@ public enum DoctorTitleEnum {
     /**
      * 主任医师
      */
-    ZHUREN(0),
+    ZHUREN("主任医师",0),
 
     /**
      * 副主任医师
      */
-    FUZHUREN(1),
+    FUZHUREN("副主任医师",1),
 
     /**
      * 主治医生
      */
-    ZHUZHI(2)
+    ZHUZHI("主治医生",2)
 
     ;
-    int value;
+    private String name;
+    private int index;
 
-    DoctorTitleEnum(int value) {
-        this.value = value;
+    DoctorTitleEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "DoctorTitleEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }

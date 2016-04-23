@@ -8,24 +8,28 @@ public enum UserIdentifiedEnum {
     /**
      * 否
      */
-    NO(0),
+    NO("否",0),
 
     /**
      * 是
      */
-    YES(1)
+    YES("是",1)
 
     ;
-    int value;
+    private String name;
 
-    UserIdentifiedEnum(int value) {
-        this.value = value;
+    private int index;
+
+    UserIdentifiedEnum(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
     @Override
     public String toString() {
         return "UserIdentifiedEnum{" +
-                "value=" + value +
+                "name='" + name + '\'' +
+                ", index=" + index +
                 '}';
     }
 }
