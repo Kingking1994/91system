@@ -14,6 +14,7 @@ public class Hospital implements Serializable{
 
     @Id
     @Column(name = "hid")
+    @GeneratedValue
     private int hid;
 
     @Column(name = "name",nullable = false,length = 64)

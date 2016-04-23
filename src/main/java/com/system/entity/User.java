@@ -12,6 +12,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "uid")
+    @GeneratedValue
     private int uid;
 
     @Column(name = "phone",length = 11,nullable = false,unique = true)

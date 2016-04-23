@@ -13,6 +13,7 @@ public class Trade implements Serializable {
 
     @Id
     @Column(name = "tid")
+    @GeneratedValue
     private int tid;
 
     @Column(name = "time",nullable = false)

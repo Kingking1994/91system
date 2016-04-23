@@ -13,6 +13,7 @@ public class Wallet implements Serializable {
 
     @Id
     @Column(name = "wid")
+    @GeneratedValue
     private int wid;
 
     @Column(name = "account",nullable = false)

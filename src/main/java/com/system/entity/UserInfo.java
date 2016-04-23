@@ -14,6 +14,7 @@ public class UserInfo implements Serializable {
 
     @Id
     @Column(name = "uiid")
+    @GeneratedValue
     private int uiid;
 
     @Column(name = "phone",length = 11,nullable = false,unique = true)

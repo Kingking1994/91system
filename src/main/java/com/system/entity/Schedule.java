@@ -14,6 +14,7 @@ public class Schedule implements Serializable {
 
     @Id
     @Column(name = "sid")
+    @GeneratedValue
     private int sid;
 
     @Column(name = "date",nullable = false)

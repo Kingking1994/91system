@@ -13,6 +13,7 @@ public class Refund implements Serializable{
 
     @Id
     @Column(name = "rid")
+    @GeneratedValue
     private int rid;
 
     @Column(name = "apply",nullable = false)

@@ -13,6 +13,7 @@ public class Doctor implements Serializable {
 
     @Id
     @Column(name = "did")
+    @GeneratedValue
     private int did;
 
     @Column(name = "name",nullable = false,length = 10)

@@ -14,6 +14,7 @@ public class Office implements Serializable {
 
     @Id
     @Column(name = "oid")
+    @GeneratedValue
     private int oid;
 
     @Column(name = "name",nullable = false)
