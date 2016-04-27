@@ -19,11 +19,11 @@ public class Wallet implements Serializable {
     @Column(name = "account",nullable = false)
     private double account;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "wid")
     private Set<Trade> tradeSet;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "wid")
     private Set<Refund> refundSet;
 

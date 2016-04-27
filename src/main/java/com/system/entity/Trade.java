@@ -25,7 +25,7 @@ public class Trade implements Serializable {
     @Column(name = "wid" ,nullable = false)
     private int wid;
 
-    @OneToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "oiid",unique = true,nullable = false)
     private OrderItem orderItem;
 

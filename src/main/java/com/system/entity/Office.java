@@ -29,7 +29,7 @@ public class Office implements Serializable {
     @Column(name = "hid",nullable = false)
     private int hid;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "oid")
     private Set<Doctor> doctorSet;
 

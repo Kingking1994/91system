@@ -31,7 +31,7 @@ public class Refund implements Serializable{
     @Column(name = "wid" ,nullable = false)
     private int wid;
 
-    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "oiid")
     private OrderItem orderItem;
 

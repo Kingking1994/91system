@@ -41,7 +41,7 @@ public class Hospital implements Serializable{
     @Column(name = "type")
     private int type;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "hid")
     private Set<Office> officeSet;
 

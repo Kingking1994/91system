@@ -37,7 +37,7 @@ public class Doctor implements Serializable {
     @Column(name = "oid",nullable = false)
     private int oid;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "did")
     private Set<Schedule> scheduleSet;
 
