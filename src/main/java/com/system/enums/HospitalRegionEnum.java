@@ -60,8 +60,8 @@ public enum HospitalRegionEnum {
     ;
 
 
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     HospitalRegionEnum(String name, int index) {
         this.name = name;

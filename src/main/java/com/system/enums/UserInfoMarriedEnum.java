@@ -21,8 +21,8 @@ public enum UserInfoMarriedEnum {
     YES("是",2)
     ;
 
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     UserInfoMarriedEnum(String name, int index) {
         this.name = name;

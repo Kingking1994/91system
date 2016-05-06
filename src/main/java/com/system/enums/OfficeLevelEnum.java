@@ -31,8 +31,8 @@ public enum OfficeLevelEnum {
     QUJI("区级",4)
 
     ;
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     OfficeLevelEnum(String name, int index) {
         this.name = name;

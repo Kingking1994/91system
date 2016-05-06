@@ -16,8 +16,8 @@ public enum OrderItemStatusEnum {
     CANCEL("已取消",1)
 
     ;
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     OrderItemStatusEnum(String name, int index) {
         this.name = name;

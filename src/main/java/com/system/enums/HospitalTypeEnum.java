@@ -13,8 +13,8 @@ public enum HospitalTypeEnum {
 
     ;
 
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     HospitalTypeEnum(String name, int index) {
         this.name = name;

@@ -20,9 +20,9 @@ public enum RefundStatusEnum {
     DOING("正在处理",2)
 
     ;
-    private String name;
+    public String name;
 
-    private int index;
+    public int index;
 
     RefundStatusEnum(String name, int index) {
         this.name = name;

@@ -16,8 +16,8 @@ public enum HospitalQualityEnum {
      */
     SILI("私立医院",1);
 
-    private String name;
-    private int index;
+    public String name;
+    public int index;
 
     HospitalQualityEnum(String name, int index) {
         this.name = name;

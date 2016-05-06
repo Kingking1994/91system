@@ -16,9 +16,9 @@ public enum UserIdentifiedEnum {
     YES("是",1)
 
     ;
-    private String name;
+    public String name;
 
-    private int index;
+    public int index;
 
     UserIdentifiedEnum(String name, int index) {
         this.name = name;
