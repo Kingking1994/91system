@@ -5,10 +5,14 @@
 	font-family:"Microsoft YaHei";
 }
 .top {
+	position: fixed;
+	top:0;
+	left: 0;
 	width: 100%;
 	height: 40px;
 	background-color: #F5F5F5;
 	line-height: 40px;
+	z-index: 1000;
 }
 .top_content {
 	height: 40px;
@@ -23,7 +27,7 @@
 }
 .top_right{
 	height: 40px;
-	width: 310px;
+	width: 350px;
 	float: right;
 	display: inline-block;
 }
@@ -49,6 +53,7 @@
 .ewm{
 	display: none;
 	padding: 15px 10px 10px 15px;
+	
 }
 .erweima:hover .ewm{
 	position: fixed;
@@ -56,6 +61,31 @@
 	background-color: #FFFFFF;
 	border: 1px solid #CECBCB;
 	border-top: transparent;
+}
+.usering{
+	display: none;
+	height: 161px;
+	width: 121px;
+}
+.user:hover .usering{
+	position: fixed;
+	display: block;
+	background-color: #FFFFFF;
+	border: 1px solid #CECBCB;
+	border-top: transparent;
+}
+.usering span{
+	height: 40px;
+	line-height: 40px;
+	width: 120px;
+	padding: 0 10px;
+	border-bottom: 1px solid #CECBCB;
+}
+.usering span:hover{
+	background: #F8C9C9;
+}
+.usering a span{
+	text-decoration:none;
 }
 .top_right ul li~li:before {
 	content:"|";
@@ -66,6 +96,7 @@
 .header{
 	width: 1000px;
 	margin: 0 auto;
+	margin-top: 40px;
 }
 .logo_block{
 	width: 200px;
@@ -126,9 +157,13 @@
 	padding: 0 10px;
 	cursor: pointer;
 	width: 100px;
-	color: white;
 	text-align: center;
+	text-decoration:none;
 }
+.tag_content ul li a{
+	color: white;
+	text-decoration:none;
+} 
 .tag_content ul li.active, .tag_content ul li:hover{
 	background: #3B9CF3;
 }
@@ -217,6 +252,9 @@
 	margin-top: 5px;
 	color:#6DA0FA;
 }
+.mainlist_mid a:hover{
+	text-decoration: none;
+}
 .mainlist_mid span{
 	display: inline-block;
 	margin: 0 30px 0 5px;
@@ -253,4 +291,90 @@
 }
 .mainright_mingyi img{
 	width: 100%;
+}
+
+/*医院科室详情 hospital.html*/
+.hospitaltitle{
+	padding: 10px 0 20px 0;
+}
+.hospital_information{
+	overflow: hidden;
+}
+.information_image{
+	display: inline-block;
+	float: left;
+}
+.hospital_information{
+	border-top: 1px solid #CECBCB;
+	border-bottom: 1px solid #CECBCB;
+	padding:20px 0;
+}
+.information_list{
+	display: inline-block;
+	float: left;
+	margin-left: 30px;
+}
+.information_list .about{
+	width: 500px;
+}
+.something{
+	overflow: hidden;
+}
+.something_phone,.something_address{
+	float: left;
+}
+.something_sum{
+	float: right;
+}
+.something_address{
+	margin: 0 50px;
+}
+.something_sum span{
+	font-size: 22px;
+	color: #FD960F;
+}
+.mainlist>img{
+	width: 1000px;
+}
+.department_list{
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px dotted #D3D3D3;
+	border-top-style: hidden;
+	padding:20px 5px 0px 10px;
+}
+.department_list ul li{
+	width:100%;
+	list-style-type:none;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -o-flex;
+	display: -ms-flex;
+	display: flex;
+	border-top: 1px dotted #D3D3D3;
+	padding:5px 0;
+}
+.department_list ul li .department_list_item{
+	flex: 1;
+	text-align: center;
+	margin:5px 0;
+	text-decoration:none;
+}
+.department_list ul li .department_list_body{
+	flex:7;
+	text-align: left;
+}
+.department_list ul li .department_list_body span{
+	width: 165px;
+	display: inline-block;
+	padding: 0 10px;
+	margin:5px 0;
+}
+.department_list ul li .department_list_body span a{
+	padding: 2px 5px;
+	text-decoration:none;
+}
+.department_list ul li .department_list_body span a:hover{
+	background: #99F3FE;
+	border-radius: 4px;
 }
