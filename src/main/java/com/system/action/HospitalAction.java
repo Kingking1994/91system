@@ -20,6 +20,8 @@ import java.util.Set;
 @Namespace("/hospitals")
 public class HospitalAction extends SuperAction {
 
+    private int hid;
+
     private static final Logger LOGGER = Logger.getLogger(HospitalAction.class);
 
     @Autowired
@@ -48,7 +50,6 @@ public class HospitalAction extends SuperAction {
     })
     public String hospitalInfo(){
         try{
-            int hid = Integer.parseInt(request.getParameter("hid"));
             Hospital hospital = hospitalService.get(hid);
             LOGGER.info(hospital);
             session.setAttribute("hospital",hospital);
@@ -59,4 +60,12 @@ public class HospitalAction extends SuperAction {
         }
     }
 
+
+    public int getHid() {
+        return hid;
+    }
+
+    public void setHid(int hid) {
+        this.hid = hid;
+    }
 }
