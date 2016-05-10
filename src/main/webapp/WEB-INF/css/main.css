@@ -378,3 +378,306 @@
 	background: #99F3FE;
 	border-radius: 4px;
 }
+/*doctorlist.html*/
+.department{
+	overflow: hidden;
+	height: 54px;
+	line-height: 54px;
+}
+.department_name{
+	float: left;
+	font-size: 28px;
+	margin: 0 10px;
+	color: #00F2FF;
+}
+.department_hos{
+	float: right;
+	color: #2347FF;
+	margin-right: 10px;
+}
+.department1{
+	overflow: hidden;
+	height: 54px;
+	line-height: 54px;
+}
+.department_name1{
+	float: left;
+	font-size: 24px;
+	margin-left: 10px;
+}
+.department_hos1{
+	float: right;
+	color: #2347FF;
+	margin-right: 10px;
+}
+.department_hos1 span{
+	color: #FF7A06;
+	font-size: 18px;
+}
+.doctorlist_title{
+	overflow: hidden;
+	height: 70px;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
+}
+.doctorlist_title>div{
+	float: left;
+	width: 175px;
+	margin: 0 10px;
+	height: 70px;
+	line-height: 70px;
+}
+.doctorlist_title ul{
+	width: 570px;
+	float: left;
+	margin-left: 30px;
+	display: inline-block;
+}
+.doctorlist_title ul li{
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	padding: 5px;
+	height: 70px;
+	text-align:center;
+}
+.doctorlist_title ul li div{
+	border-radius: 5px;
+	background-color: #EDFCFC;
+	height: 60px;
+	padding: 8px;
+}
+.doctor_list_first{
+	overflow: hidden;
+	border-bottom: 1px solid #CECBCB;
+}
+.doctor_list_information,.doctor_list_goodat{
+	float: left;
+	width: 175px;
+	margin: 0 10px;
+	height: 150px;
+	padding: 20px 0;
+}
+.doctor_list_information_img, .doctor_list_information_name{
+	float: left;
+}
+.doctor_list_information_img img{
+	height: 100px;
+	width: 80px;
+	margin-right: 10px;
+}
+.doctor_list_information_name div{
+	height: 50px;
+	line-height: 50px;
+}
+.doctor_list_information_name div:first-child{
+	color: #5C91FF;
+	font-size: 22px;
+}
+.doctor_list_information_name div:last-child{
+	color: #7E7E7E;
+}
+.doctor_list_goodat p{
+	font-size: 12px;
+}
+.doctor_list_time{
+	float: left;
+	height: 150px;
+	width: 595px;
+}
+.doctor_list_time ul{
+	width: 590px;
+	float: left;
+	display: inline-block;
+	border-bottom: 1px solid #CECBCB;
+}
+.doctor_list_time ul li{
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	padding: 5px;
+	height: 70px;
+	text-align:center;
+}
+.doctor_list_time ul li a{
+	display: block;
+	border-radius: 5px;
+	height: 60px;
+	padding: 13px 8px;
+	text-decoration: none;
+}
+.doctor_list_time ul li a:hover{
+	background: #EDFCFC;
+}
+.doctor_list_time .time_am, .doctor_list_time .time_pm{
+	width: 30px;
+}
+.doctor{
+	width: 1000px;
+	margin: 0 auto;
+	padding: 3px;
+	margin-top: -130px;
+}
+.doctor_title{
+	height: 160px;
+	position: relative;
+	background: #FFFFFF;
+}
+.doctor_img,.doctor_name{
+	float: left;
+}
+.doctor_img img{
+	height: 140px;
+	width: 110px;
+	margin: 10px;
+}
+.doctor_name div{
+	height: 40px;
+	line-height: 40px;
+}
+.doctor_name div:first-child{
+	color: #5C91FF;
+	font-size: 26px;
+	height: 60px;
+	line-height: 60px;
+}
+.doctor_name div:last-child{
+	color: #7E7E7E;
+}
+.doctor_ewm{
+	position: absolute;
+	bottom: 0;
+	right: 20px;
+}
+.doctor_ewm img{
+	height: 90px;
+	width: 220px;
+}
+.mainpagelist{
+	width: 990px;
+	margin:0 auto;
+	height: 40px;
+	line-height: 40px;
+	background: #2F7AFC;
+	margin: 5px;
+}
+.mainpagelist ul li{
+	display: inline-block;
+	float: left;
+	padding: 0 10px;
+	cursor: pointer;
+	width: 100px;
+	text-align: center;
+	text-decoration:none;
+}
+.mainpagelist ul li a{
+	color: white;
+	text-decoration:none;
+} 
+.mainpagelist ul li.active, .mainpagelist ul li:hover{
+	background: #3B9CF3;
+}
+.mainpage{
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.mainpage_left{
+	width: 750px;
+	float: left;
+}
+
+.mainpage_left_title{
+	overflow: hidden;
+	height: 54px;
+	line-height: 54px;
+}
+.mainpage_left_title_name{
+	float: left;
+	font-size: 24px;
+	margin-left: 10px;
+}
+.mainpage_left_title_pep{
+	float: right;
+	color: #2347FF;
+	margin-right: 10px;
+}
+.mainpage_left_title_pep span{
+	color: #FF7A06;
+	font-size: 18px;
+}
+.mainpage_left_title_keshi{
+	overflow: hidden;
+	height: 70px;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
+}
+.mainpage_left_title_keshi>div{
+	float: left;
+	width: 125px;
+	margin: 0 10px;
+	height: 70px;
+	line-height: 70px;
+}
+.mainpage_left_title_keshi ul{
+	width: 570px;
+	float: left;
+	margin-left: 30px;
+	display: inline-block;
+}
+.mainpage_left_title_keshi ul li{
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	padding: 5px;
+	height: 70px;
+	text-align:center;
+}
+.mainpage_left_title_keshi ul li div{
+	border-radius: 5px;
+	background-color: #EDFCFC;
+	height: 60px;
+	padding: 8px;
+}
+.doctorpage_dep{
+	float: left;
+	width: 125px;
+	margin: 0 10px;
+	height: 150px;
+	padding: 50px 0;
+}
+.doctorpage_time{
+	float: left;
+	height: 150px;
+	width: 595px;
+}
+.doctorpage_time ul{
+	width: 590px;
+	float: left;
+	display: inline-block;
+	border-bottom: 1px solid #CECBCB;
+}
+.doctorpage_time ul li{
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	padding: 5px;
+	height: 70px;
+	text-align:center;
+}
+.doctorpage_time ul li a{
+	display: block;
+	border-radius: 5px;
+	height: 60px;
+	padding: 13px 8px;
+	text-decoration: none;
+}
+.doctorpage_time ul li a:hover{
+	background: #EDFCFC;
+}
+.doctorpage_time .time_am, .doctorpage_time .time_pm{
+	width: 30px;
+}
+.mainpage_right{
+	margin: 85px 0 0 770px;
+}
