@@ -22,7 +22,7 @@ import java.util.Set;
  * Created by king on 2016/4/27.
  */
 @Namespace("/hospitals")
-public class HospitalAction extends SuperAction implements ModelDriven{
+public class HospitalAction extends SuperAction implements ModelDriven<Hospital>{
 
     //用于接受查询条件
     private Hospital hospitalModel = new Hospital();
@@ -79,7 +79,7 @@ public class HospitalAction extends SuperAction implements ModelDriven{
     }
 
 
-    public Object getModel() {
+    public Hospital getModel() {
         return hospitalModel;
     }
 }
