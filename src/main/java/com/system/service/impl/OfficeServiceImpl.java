@@ -2,6 +2,7 @@ package com.system.service.impl;
 
 import com.system.dao.OfficeDao;
 import com.system.entity.Office;
+import com.system.entity.Pager;
 import com.system.service.OfficeService;
 import com.system.util.BeanUtil;
 import org.apache.log4j.Logger;
@@ -88,5 +89,9 @@ public class OfficeServiceImpl implements OfficeService {
     public List<Office> findByLevel(int level) {
         LOGGER.info("findByLevel level = " + level);
         return officeDao.findByLevel(level);
+    }
+
+    public Pager<Office> findOffice(Office searchModel, int pageNum, int pageSize) {
+        return officeDao.findOffice(searchModel,pageNum,pageSize);
     }
 }
