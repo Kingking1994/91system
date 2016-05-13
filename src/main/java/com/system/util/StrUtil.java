@@ -1,5 +1,8 @@
 package com.system.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 字符串常用方法工具类
  */
@@ -29,6 +32,17 @@ public final class StrUtil {
      */
     public static boolean isNotBlank(String str) {
         return !isBlank(str);
+    }
+
+    /**
+     * 判断input是否为大于等于0的整数
+     * @param input
+     * @return
+     */
+    public static boolean isNum(String input){
+        Pattern pattern = Pattern.compile("^\\\\d+$");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 
 }
