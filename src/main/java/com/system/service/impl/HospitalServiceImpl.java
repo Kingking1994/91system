@@ -5,6 +5,7 @@ import com.system.entity.Hospital;
 import com.system.entity.Pager;
 import com.system.service.HospitalService;
 import com.system.util.BeanUtil;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,5 +103,12 @@ public class HospitalServiceImpl implements HospitalService{
 
     public Pager<Hospital> findHospital(Hospital searchModel, int pageNum, int pageSize) {
         return hospitalDao.findHospital(searchModel,pageNum,pageSize);
+    }
+
+    public List<Hospital> findByName(String name) {
+        if(StrUtil.isNotBlank(name)){
+            return hospitalDao.findByName(name);
+        }
+        return null;
     }
 }

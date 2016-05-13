@@ -150,6 +150,13 @@ public class DoctorDaoImpl implements DoctorDao {
         return result;
     }
 
+    public List<Doctor> findByName(String name) {
+        StringBuilder hql = new StringBuilder("from Doctor where name like :name ");
+        Query query = this.getCurrentSession().createQuery(hql.toString());
+        query.setParameter("name","%"+name+"%");
+        return query.list();
+    }
+
 
     /**
      * 设置hql中的查询参数

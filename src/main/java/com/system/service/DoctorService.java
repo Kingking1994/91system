@@ -31,4 +31,6 @@ public interface DoctorService {
     List<Doctor> findByTitle(int title);
 
     Pager<Doctor> findDoctor(Doctor searchModel,int pageNum,int pageSize);
+
+    List<Doctor> findByName(String name);
 }

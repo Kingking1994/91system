@@ -36,5 +36,5 @@ public interface HospitalService {
 
     Pager<Hospital> findHospital(Hospital searchModel,int pageNum,int pageSize);
 
-
+    List<Hospital> findByName(String name);
 }

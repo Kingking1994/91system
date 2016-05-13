@@ -31,4 +31,6 @@ public interface OfficeService {
     List<Office> findByLevel(int level);
 
     Pager<Office> findOffice(Office searchModel,int pageNum,int pageSize);
+
+    List<Office> findByName(String name);
 }

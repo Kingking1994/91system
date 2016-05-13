@@ -5,6 +5,7 @@ import com.system.entity.Office;
 import com.system.entity.Pager;
 import com.system.service.OfficeService;
 import com.system.util.BeanUtil;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,5 +94,12 @@ public class OfficeServiceImpl implements OfficeService {
 
     public Pager<Office> findOffice(Office searchModel, int pageNum, int pageSize) {
         return officeDao.findOffice(searchModel,pageNum,pageSize);
+    }
+
+    public List<Office> findByName(String name) {
+        if(StrUtil.isNotBlank(name)){
+            return officeDao.findByName(name);
+        }
+        return null;
     }
 }

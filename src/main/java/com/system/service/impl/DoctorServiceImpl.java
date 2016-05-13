@@ -5,6 +5,7 @@ import com.system.entity.Doctor;
 import com.system.entity.Pager;
 import com.system.service.DoctorService;
 import com.system.util.BeanUtil;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,5 +94,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     public Pager<Doctor> findDoctor(Doctor searchModel, int pageNum, int pageSize) {
         return doctorDao.findDoctor(searchModel,pageNum,pageSize);
+    }
+
+    public List<Doctor> findByName(String name) {
+        if(StrUtil.isNotBlank(name)){
+            return doctorDao.findByName(name);
+        }
+        return null;
     }
 }

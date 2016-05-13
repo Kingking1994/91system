@@ -163,4 +163,11 @@ public class OfficeDaoImpl implements OfficeDao{
         }
         return query;
     }
+
+    public List<Office> findByName(String name) {
+        StringBuilder hql = new StringBuilder("from Office where name like :name ");
+        Query query = this.getCurrentSession().createQuery(hql.toString());
+        query.setParameter("name","%"+name+"%");
+        return query.list();
+    }
 }

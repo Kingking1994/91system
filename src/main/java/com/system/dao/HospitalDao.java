@@ -19,4 +19,6 @@ public interface HospitalDao extends GenericDao<Hospital,Integer> {
     List<Hospital> findByType(int type);
 
     Pager<Hospital> findHospital(Hospital searchModel,int pageNum,int pageSize);
+
+    List<Hospital> findByName(String name);
 }
