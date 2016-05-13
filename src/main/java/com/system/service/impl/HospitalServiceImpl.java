@@ -2,6 +2,7 @@ package com.system.service.impl;
 
 import com.system.dao.HospitalDao;
 import com.system.entity.Hospital;
+import com.system.entity.Pager;
 import com.system.service.HospitalService;
 import com.system.util.BeanUtil;
 import org.apache.log4j.Logger;
@@ -97,5 +98,9 @@ public class HospitalServiceImpl implements HospitalService{
     public List<Hospital> findByType(int type) {
         LOGGER.info("findByType type = " + type);
         return hospitalDao.findByType(type);
+    }
+
+    public Pager<Hospital> findHospital(Hospital searchModel, int pageNum, int pageSize) {
+        return hospitalDao.findHospital(searchModel,pageNum,pageSize);
     }
 }

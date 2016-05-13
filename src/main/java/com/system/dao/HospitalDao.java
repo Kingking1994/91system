@@ -1,6 +1,7 @@
 package com.system.dao;
 
 import com.system.entity.Hospital;
+import com.system.entity.Pager;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface HospitalDao extends GenericDao<Hospital,Integer> {
     List<Hospital> findByLevel(int level);
 
     List<Hospital> findByType(int type);
+
+    Pager<Hospital> findHospital(Hospital searchModel,int pageNum,int pageSize);
 }
