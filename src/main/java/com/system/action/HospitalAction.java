@@ -41,15 +41,14 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
     public String hospitalList(){
         try {
             String pageNumString = request.getParameter("pageNum");
-            if(StrUtil.isNum(pageNumString)){
-                int pageNum = Integer.parseInt(pageNumString);
-                Pager<Hospital> hospitalPager = hospitalService.findHospital(hospitalModel,pageNum, Constant.DEAULT_PAGE_SIZE);
-                LOGGER.info(hospitalPager);
-                session.setAttribute("result",hospitalPager);
-                return "success";
-            }else {
-                return "failure";
+            int pageNum = 1;//设置默认页数
+            if(StrUtil.isNum(pageNumString)){//如果是非法是字符串，则使用默认页数
+                pageNum = Integer.parseInt(pageNumString);
             }
+            Pager<Hospital> hospitalPager = hospitalService.findHospital(hospitalModel,pageNum, Constant.DEAULT_PAGE_SIZE);
+            LOGGER.info(hospitalPager);
+            session.setAttribute("result",hospitalPager);
+            return "success";
         }catch (Exception e){
             LOGGER.error(e);
             return "failure";
