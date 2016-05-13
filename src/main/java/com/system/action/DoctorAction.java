@@ -1,11 +1,15 @@
 package com.system.action;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.system.entity.Doctor;
 import com.system.entity.Hospital;
 import com.system.entity.Office;
+import com.system.entity.Pager;
+import com.system.enums.Constant;
 import com.system.service.DoctorService;
 import com.system.service.HospitalService;
 import com.system.service.OfficeService;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -18,9 +22,9 @@ import java.util.List;
  * Created by king on 2016/5/4.
  */
 @Namespace("/doctors")
-public class DoctorAction extends SuperAction {
+public class DoctorAction extends SuperAction implements ModelDriven<Doctor>{
 
-    private int did;
+    private Doctor doctorModel = new Doctor();
 
     private static final Logger LOGGER = Logger.getLogger(DoctorAction.class);
 
@@ -40,9 +44,14 @@ public class DoctorAction extends SuperAction {
     })
     public String doctorList(){
         try{
-            List<Doctor> doctorList = doctorService.findAll();
-            LOGGER.info(doctorList);
-            session.setAttribute("doctorList",doctorList);
+            String pageNumString = request.getParameter("pageNum");
+            int pageNum = 1;//设置默认页数
+            if(StrUtil.isNum(pageNumString)){//如果是非法是字符串，则使用默认页数
+                pageNum = Integer.parseInt(pageNumString);
+            }
+            Pager<Doctor> doctorPager = doctorService.findDoctor(doctorModel, pageNum, Constant.DEAULT_PAGE_SIZE);
+            LOGGER.info(doctorPager);
+            session.setAttribute("result",doctorPager);
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
@@ -57,16 +66,22 @@ public class DoctorAction extends SuperAction {
     })
     public String doctorInfo(){
         try {
-            Doctor doctor = doctorService.get(did);
-            LOGGER.info(doctor);
-            session.setAttribute("doctor",doctor);
-            Office office = officeService.get(doctor.getOid());
-            LOGGER.info(office);
-            session.setAttribute("office",office);
-            Hospital hospital = hospitalService.get(office.getHid());
-            LOGGER.info(hospital);
-            session.setAttribute("hospital",hospital);
-            return "success";
+            String didString = request.getParameter("did");
+            if(StrUtil.isNum(didString)){
+                int did = Integer.parseInt(didString);
+                Doctor doctor = doctorService.get(did);
+                LOGGER.info(doctor);
+                session.setAttribute("doctor",doctor);
+                Office office = officeService.get(doctor.getOid());
+                LOGGER.info(office);
+                session.setAttribute("office",office);
+                Hospital hospital = hospitalService.get(office.getHid());
+                LOGGER.info(hospital);
+                session.setAttribute("hospital",hospital);
+                return "success";
+            }else{
+                return "failure";
+            }
         }catch (Exception e){
             LOGGER.error(e);
             return "failure";
@@ -74,11 +89,7 @@ public class DoctorAction extends SuperAction {
     }
 
 
-    public int getDid() {
-        return did;
-    }
-
-    public void setDid(int did) {
-        this.did = did;
+    public Doctor getModel() {
+        return doctorModel;
     }
 }

@@ -2,6 +2,7 @@ package com.system.service.impl;
 
 import com.system.dao.DoctorDao;
 import com.system.entity.Doctor;
+import com.system.entity.Pager;
 import com.system.service.DoctorService;
 import com.system.util.BeanUtil;
 import org.apache.log4j.Logger;
@@ -88,5 +89,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> findByTitle(int title) {
         LOGGER.info("findByTitle title = " + title);
         return doctorDao.findByTitle(title);
+    }
+
+    public Pager<Doctor> findDoctor(Doctor searchModel, int pageNum, int pageSize) {
+        return doctorDao.findDoctor(searchModel,pageNum,pageSize);
     }
 }
