@@ -148,16 +148,6 @@ public class SearchAction extends SuperAction {
     }
 
 
-    @Action(value = "test" ,results = {
-            @Result(name = "success",location = "success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
-    })
-    public String test(){
-        LOGGER.info(session);
-        LOGGER.info(application);
-        return "success";
-    }
-
     public String getSearchString() {
         return searchString;
     }
