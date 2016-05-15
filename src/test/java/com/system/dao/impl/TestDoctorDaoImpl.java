@@ -4,6 +4,7 @@ import com.system.dao.DoctorDao;
 import com.system.dao.OfficeDao;
 import com.system.entity.Doctor;
 import com.system.entity.Office;
+import com.system.entity.Pager;
 import com.system.entity.Schedule;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -45,6 +46,13 @@ public class TestDoctorDaoImpl {
                 LOGGER.info(schedule);
             }
         }
+    }
+
+    @Test
+    public void testFindDoctor(){
+        Doctor doctor = new Doctor("t",7,0);
+        Pager<Doctor> doctorPager = doctorDao.findDoctor(doctor,1,5);
+        LOGGER.info(doctorPager);
     }
 
 }

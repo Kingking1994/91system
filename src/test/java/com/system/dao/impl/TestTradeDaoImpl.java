@@ -51,6 +51,5 @@ public class TestTradeDaoImpl extends GenericTest {
     public void testGet(){
         Trade trade = tradeDao.get(1);
         LOGGER.info(trade);
-        LOGGER.info(trade.getOrderItem());
     }
 }

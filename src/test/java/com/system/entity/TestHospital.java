@@ -30,4 +30,10 @@ public class TestHospital {
         export.execute(true, true, false, false);
     }
 
+    @Test
+    public void test(){
+        Hospital hospital = new Hospital();
+        LOGGER.info(hospital);
+    }
+
 }

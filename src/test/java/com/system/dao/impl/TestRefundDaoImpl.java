@@ -52,4 +52,9 @@ public class TestRefundDaoImpl extends GenericTest {
         OrderItem orderItem = refund.getOrderItem();
         LOGGER.info(orderItem);
     }
+
+    @Test
+    public void testFindAll(){
+        LOGGER.info(refundDao.findAll());
+    }
 }

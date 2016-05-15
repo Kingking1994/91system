@@ -4,6 +4,7 @@ import com.system.dao.HospitalDao;
 import com.system.dao.OfficeDao;
 import com.system.entity.Hospital;
 import com.system.entity.Office;
+import com.system.entity.Pager;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,5 +30,12 @@ public class TestOfficeDaoImpl {
     @Test
     public void testSave(){
 
+    }
+
+    @Test
+    public void testFindOffice(){
+        Office office = new Office("是",1,1);
+        Pager<Office> officePager = officeDao.findOffice(office,1,2);
+        LOGGER.info(officePager);
     }
 }
