@@ -40,7 +40,7 @@ public final class StrUtil {
      * @return
      */
     public static boolean isNum(String input){
-        Pattern pattern = Pattern.compile("^\\\\d+$");
+        Pattern pattern = Pattern.compile("^\\d+$");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
