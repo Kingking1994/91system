@@ -15,7 +15,7 @@ public class HAdmin implements Serializable {
     @GeneratedValue
     private int haid;
 
-    @Column(name = "account", length = 10 , nullable = false)
+    @Column(name = "account", length = 10 , nullable = false , unique = true)
     private String account;
 
     @Column(name = "password", length = 16 , nullable = false)

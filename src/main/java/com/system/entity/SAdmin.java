@@ -15,7 +15,7 @@ public class SAdmin implements Serializable {
     @GeneratedValue
     private int said;
 
-    @Column(name = "account", length = 10 , nullable = false)
+    @Column(name = "account", length = 10 , nullable = false ,unique = true)
     private String account;
 
     @Column(name = "password", length = 16 , nullable = false)
