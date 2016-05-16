@@ -26,4 +26,6 @@ public interface HAdminService {
     void flush();
 
     List<HAdmin> findByHid(int hid);
+
+    HAdmin findByAccount(String account);
 }

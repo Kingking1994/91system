@@ -61,4 +61,10 @@ public class HAdminDaoImpl implements HAdminDao {
     public void flush() {
         this.getCurrentSession().flush();
     }
+
+    public HAdmin findByAccount(String account) {
+        StringBuilder hql = new StringBuilder("from HAdmin where account = "+ account);
+        HAdmin hAdmin = (HAdmin)this.getCurrentSession().createQuery(hql.toString()).uniqueResult();
+        return hAdmin;
+    }
 }

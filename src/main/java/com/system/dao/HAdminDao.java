@@ -10,4 +10,6 @@ import java.util.List;
 public interface HAdminDao extends GenericDao<HAdmin,Integer> {
 
     List<HAdmin> findByHid(int hid);
+
+    HAdmin findByAccount(String account);
 }

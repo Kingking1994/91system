@@ -4,6 +4,7 @@ import com.system.dao.HAdminDao;
 import com.system.entity.HAdmin;
 import com.system.service.HAdminService;
 import com.system.util.BeanUtil;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,13 @@ public class HAdminServiceImpl implements HAdminService {
         }else{
             return hAdminDao.findByHid(hid);
         }
+    }
+
+    public HAdmin findByAccount(String account) {
+        LOGGER.info("account = "+ account);
+        if(StrUtil.isBlank(account)){
+            return null;
+        }
+        return hAdminDao.findByAccount(account);
     }
 }
