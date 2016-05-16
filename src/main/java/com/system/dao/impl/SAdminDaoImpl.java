@@ -55,4 +55,10 @@ public class SAdminDaoImpl implements SAdminDao {
     public void flush() {
         this.getCurrentSession().flush();
     }
+
+    public SAdmin findByAccount(String account) {
+        StringBuilder hql = new StringBuilder("from SAdmin where account = " + account);
+        SAdmin sAdmin = (SAdmin)this.getCurrentSession().createQuery(hql.toString()).uniqueResult();
+        return sAdmin;
+    }
 }

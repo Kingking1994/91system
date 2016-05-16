@@ -4,6 +4,7 @@ import com.system.dao.SAdminDao;
 import com.system.entity.SAdmin;
 import com.system.service.SAdminService;
 import com.system.util.BeanUtil;
+import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,5 +79,13 @@ public class SAdminServiceImpl implements SAdminService {
     public void flush() {
         LOGGER.info("flush");
         sAdminDao.flush();
+    }
+
+    public SAdmin findByAccount(String account) {
+        LOGGER.info("account" + account);
+        if(StrUtil.isBlank(account)){
+            return null;
+        }
+        return sAdminDao.findByAccount(account);
     }
 }

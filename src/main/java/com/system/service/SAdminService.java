@@ -24,4 +24,6 @@ public interface SAdminService {
     void delete(int id);
 
     void flush();
+
+    SAdmin findByAccount(String account);
 }
