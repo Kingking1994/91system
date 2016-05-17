@@ -39,7 +39,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
             if(BeanUtil.nonNull(tmp)){
                 if(tmp.getPassword().equals(hAdmin.getPassword())){
                     LOGGER.info("登录成功");
-                    session.setAttribute("account",tmp.getAccount());
+                    session.setAttribute("h_account",tmp.getAccount());
                     return "success";
                 }else{
                     LOGGER.warn("密码不正确");
@@ -63,9 +63,9 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
     })
     public String logout(){
         try {
-            if(StrUtil.isNotBlank((String) session.getAttribute("account"))){
-                LOGGER.info("logout account = " + session.getAttribute("account"));
-                session.removeAttribute("account");
+            if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
+                LOGGER.info("logout account = " + session.getAttribute("h_account"));
+                session.removeAttribute("h_account");
                 session.invalidate();
             }
             return "success";
@@ -85,8 +85,8 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
     })
     public String reset_password(){
         try {
-            if(StrUtil.isNotBlank((String)session.getAttribute("account"))){
-                HAdmin tmp = hAdminService.findByAccount((String)session.getAttribute("account"));
+            if(StrUtil.isNotBlank((String)session.getAttribute("h_account"))){
+                HAdmin tmp = hAdminService.findByAccount((String)session.getAttribute("h_account"));
                 if(tmp.getPassword().equals(hAdmin.getPassword())){
                     if(PatternUtil.checkPassword(newPassword)){
                         tmp.setPassword(newPassword);
