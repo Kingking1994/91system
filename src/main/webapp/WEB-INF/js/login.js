@@ -4,6 +4,7 @@
 $(document).ready(function(){
    findcontent();
    detailshow();
+   settingchange();
 });
 function change(obj){
     if($(obj).attr('class')=='banner_title2')
@@ -21,9 +22,27 @@ function change(obj){
         $(".tit_span").text("用户注册");
     }
 }
+function settingchange(){
+   $(".account_list").delegate('li', 'click', function() {
+
+      $(this).addClass('current');
+      $(this).siblings().removeClass('current');
+      if($(this).text()=="账号信息")
+      {
+         $(".account_setting").show();
+          $(".password").hide();
+      }
+      else
+      {
+         $(".password").show();
+          $(".account_setting").hide();
+      }
+   });
+}
 function findcontent(){
     $(".user_menu").delegate('.user_f', 'click', function() {
-       $(".order").filter(":visible").hide();
+      // $(this) .addClass('bg_on');
+        $(".order").filter(":visible").hide();
       if($(this).text()=="订单管理")
         { 
           $(".right_title").text($(this).text());
@@ -31,10 +50,10 @@ function findcontent(){
       
         }
         else{
-          if($(this).text()=="密码管理")
+          if($(this).text()=="账号设置")
         { 
           $(".right_title").text($(this).text());
-          $(".right_content .password").show();
+          $(".right_content .account").show();
         }
         else{
           $(".right_title").text($(this).text());
@@ -46,10 +65,10 @@ function findcontent(){
 }
 function detailshow(){
     $(".order_list").delegate('.right_item', 'click', function() {
-         $(".order_detail").show();
+    $(".order_detail").show();
     $(".right_content .order_list").hide();
   });
-    $(".right_title a").bind('click',  function() {
+    $(".title a").bind('click',  function() {
     $(".order_detail").hide();
     $(".right_content .order_list").show();
   /* Act on the event */
