@@ -41,8 +41,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
     })
     public String sAdmin_list(){
         try {
-            if(StrUtil.isNotBlank((String)session.getAttribute("account"))){
-                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("account"));
+            if(StrUtil.isNotBlank((String)session.getAttribute("s_account"))){
+                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("s_account"));
                 if(tmp.getIsroot() == SAdminIsrootEnum.TRUE.index){
                     List<SAdmin> sAdminList = sAdminService.findAll();
                     LOGGER.info(sAdminList);
@@ -76,8 +76,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
     })
     public String sAdmin_add(){
         try {
-            if(StrUtil.isNotBlank((String)session.getAttribute("account"))){
-                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("account"));
+            if(StrUtil.isNotBlank((String)session.getAttribute("s_account"))){
+                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("s_account"));
                 if(tmp.getIsroot() == SAdminIsrootEnum.TRUE.index){
                     SAdmin s = sAdminService.findByAccount(sAdmin.getAccount());
                     if(BeanUtil.isNull(s)){
@@ -123,8 +123,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
     })
     public String sAdmin_delete(){
         try {
-            if(StrUtil.isNotBlank((String)session.getAttribute("account"))){
-                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("account"));
+            if(StrUtil.isNotBlank((String)session.getAttribute("s_account"))){
+                SAdmin tmp = sAdminService.findByAccount((String)session.getAttribute("s_account"));
                 if(tmp.getIsroot() == SAdminIsrootEnum.TRUE.index){
                     String saidString = request.getParameter("said");
                     if(StrUtil.isNum(saidString)){
