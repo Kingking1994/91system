@@ -2,6 +2,7 @@ package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.entity.User;
+import com.system.enums.UserIdentifiedEnum;
 import com.system.service.UserService;
 import com.system.util.BeanUtil;
 import com.system.util.PatternUtil;
@@ -46,7 +47,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                         int uid = userService.save(user);
                         LOGGER.info(uid);
                         session.setAttribute("userPhone",user.getPhone());
-                        session.setAttribute("identify",user.getIdentified());
+                        session.setAttribute("identify", UserIdentifiedEnum.NO.index);
                         return "success";
                     }else{
                         LOGGER.warn("密码长度不对或者包含特殊字符");
@@ -92,7 +93,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                 }else{
                     LOGGER.info("登录成功 ： " + user.getPhone());
                     session.setAttribute("userPhone",user.getPhone());
-                    session.setAttribute("identify",user.getIdentified());
+                    session.setAttribute("identify",tmp.getIdentified());
                     return "success";
                 }
             }
