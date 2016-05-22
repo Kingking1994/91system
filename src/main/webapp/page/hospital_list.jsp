@@ -1,3 +1,10 @@
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -7,6 +14,64 @@
 	<script type="text/javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
+
+	<script type="text/javascript">
+		// 当前第几页数据
+		var currentPage = ${result.currentPage};
+
+		// 总页数
+		var totalPage = ${result.totalPage};
+
+
+		// 第一页
+		function firstPage(){
+			if(currentPage == 1){
+				alert("已经是第一页数据");
+				return false;
+			}else{
+				var url = "<%=path%>/hospitals/list?pageNum= 1";
+				location.href = url;
+				return true;
+			}
+		}
+
+		// 下一页
+		function nextPage(){
+			if(currentPage == totalPage){
+				alert("已经是最后一页数据");
+				return false;
+			}else{
+				var url = "<%=path%>/hospitals/list?pageNum=" + (currentPage+1);
+				location.href = url;
+				return true;
+			}
+		}
+
+		// 上一页
+		function previousPage(){
+			if(currentPage == 1){
+				alert("已经是第一页数据");
+				return false;
+			}else{
+				var url = "<%=path%>/hospitals/list?pageNum="+ (currentPage-1);
+				location.href = url;
+				return true;
+			}
+		}
+
+		// 尾页
+		function lastPage(){
+			if(currentPage == totalPage){
+				alert("已经是最后一页数据");
+				return false;
+			}else{
+				var url = "<%=path%>/hospitals/list?pageNum=${result.totalPage}";
+				location.href = url;
+				return true;
+			}
+		}
+	</script>
+
 </head>
 <body>
 <!--头部-->
@@ -33,16 +98,15 @@
 		  				<img src="../images/erweima.gif">
 		  			</div>
 		  		</li>
-		  		<li>下载APP</li>
 		  		<li>咨询</li>
 		  		<li class="user">
 		  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					<div style="display: inline-block">夏洛克</div>
+					<div style="display: inline-block">${userPhone}</div>
 		  			<div class="usering" >
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;用户中心</span></a>
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;私人医生</span></a>
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-bell" aria-hidden="true">&nbsp;消息</span></a>
-		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-off" aria-hidden="true">&nbsp;退出</span></a>
+		  				<a href="<%=path%>/users/logout"><span class="glyphicon glyphicon-off" aria-hidden="true">&nbsp;退出</span></a>
 		  			</div>
 		  		</li>
 		  		<div class="clear"></div>
@@ -62,7 +126,7 @@
 		<form action="" class="search_form">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 		    <input type="text" value="" class="search_text" placeholder="医院、医生、或疾病名称"></input>
-		    <input type="submit" value="搜索" class="search_button"></input
+		    <input type="submit" value="搜索" class="search_button"></input>
 		</form>
 	</div>
     <div class="clear"></div>
@@ -72,9 +136,9 @@
 <div class="tag">
 	<div class="tag_content">
 		<ul>
-			<li ><a href="./findhospital.html">找医院</a></li>
-			<li ><a href="./finddepartment.html">找科室</a></li>
-			<li class="active"><a href="#">找医生</a></li>
+			<li class="active"><a href="<%=path%>/hospitals/list">找医院</a></li>
+			<li ><a href="<%=path%>/offices/list">找科室</a></li>
+			<li ><a href="<%=path%>/doctors/list">找医生</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
@@ -107,108 +171,45 @@
 
 <!--详细列表-->
 <div class="mainlist">
-	<div class="mainleft">
+	<div class="mainleft" style="margin-left:185px">
+
+		<!-- 后台返回结果为空 -->
+		<c:if test="${fn:length(result.dataList) eq 0 }">
+			<span>查询的结果不存在</span>
+		</c:if>
+
+
+		<c:if test="${fn:length(result.dataList) gt 0 }">
+		<!--列表循环开始-->
+			<c:forEach items="${result.dataList }" var="hospital">
 		<div class="first_list">
 			<div class="mainlist_image">
-				<a href="#">
+				<a href="<%=path%>/hospitals/info?hid=${hospital.hid}">
 					<img src="../images/hospital.jpg" alt="医院">
 				</a>
 			</div>
 			<div class="mainlist_mid">
-				<a href="http://www.baidu.com"><h3>广州伊丽莎白妇产医院</h3></a>
-				<p>别名：广州伊丽莎白妇产医院</p>
-				<p>广州市康王中路484号</p>
-				<p>电话：020-12345678</p>
-				<span class="glyphicon glyphicon-ok-circle" aria-hidden="true">12</span>
-				<span class="glyphicon glyphicon-question-sign" aria-hidden="true">0</span>
-				<span class="glyphicon glyphicon-plus" aria-hidden="true">0</span>
-			</div>
-			<div class="mainlist_right">
-				<div>已预约人数</div>
-				<h1>12345</h1>
+				<a href="<%=path%>/hospitals/info?hid=${hospital.hid}"><h3>${hospital.name}</h3></a>
+				<p>${hospital.address}</p>
+				<p>电话：${hospital.telephone}</p>
+				<%--<span class="glyphicon glyphicon-ok-circle" aria-hidden="true">12</span>--%>
+				<%--<span class="glyphicon glyphicon-question-sign" aria-hidden="true">0</span>--%>
+				<%--<span class="glyphicon glyphicon-plus" aria-hidden="true">0</span>--%>
 			</div>
 			<div class="clear"></div>
 		</div>
+		<!--列表循环结束-->
+			</c:forEach>
 
+			<br> 共${result.totalRecord }条记录共${result.totalPage }页&nbsp;&nbsp;当前第${result.currentPage }页&nbsp;&nbsp;
+			<a href="#" onclick="firstPage();">首页</a>&nbsp;&nbsp;
+			<a href="#" onclick="previousPage();">上一页</a>&nbsp;&nbsp;
+			<a href="#" onclick="nextPage();">下一页</a>&nbsp;&nbsp;
+			<a href="#" onclick="lastPage();">尾页</a>
+
+		</c:if>
 	</div>
-	<div class="mainright">
-		<div class="advice">
-			<h3>推荐医院</h3>
-			<a href="http://www.baidu.com">
-				<div class="first_advice">
-					<div class="first_advice_image">
-						<img src="../images/advice.jpg">
-					</div>
-					<div class="first_advice_right">
-						<h5>广州男科医院</h5>
-						<h6>已预约人数:<sapn>12333</span></h6>
-					</div>
-					<div class="first_advice_red">
-						宇宙级重点
-					</div>
-				</div>
-			</a>
-			<a href="http://www.baidu.com">
-				<div class="first_advice">
-					<div class="first_advice_image">
-						<img src="../images/advice.jpg">
-					</div>
-					<div class="first_advice_right">
-						<h5>广州男科医院</h5>
-						<h6>已预约人数:<sapn>12333</span></h6>
-					</div>
-					<div class="first_advice_red">
-						宇宙级重点
-					</div>
-				</div>
-			</a>
-			<a href="http://www.baidu.com">
-				<div class="first_advice">
-					<div class="first_advice_image">
-						<img src="../images/advice.jpg">
-					</div>
-					<div class="first_advice_right">
-						<h5>广州男科医院</h5>
-						<h6>已预约人数:<sapn>12333</span></h6>
-					</div>
-					<div class="first_advice_red">
-						宇宙级重点
-					</div>
-				</div>
-			</a>
-			<a href="http://www.baidu.com">
-				<div class="first_advice">
-					<div class="first_advice_image">
-						<img src="../images/advice.jpg">
-					</div>
-					<div class="first_advice_right">
-						<h5>广州男科医院</h5>
-						<h6>已预约人数:<sapn>12333</span></h6>
-					</div>
-					<div class="first_advice_red">
-						宇宙级重点
-					</div>
-				</div>
-			</a>
-			<a href="http://www.baidu.com">
-				<div class="first_advice">
-					<div class="first_advice_image">
-						<img src="../images/advice.jpg">
-					</div>
-					<div class="first_advice_right">
-						<h5>广州男科医院</h5>
-						<h6>已预约人数:<sapn>12333</span></h6>
-					</div>
-					<div class="first_advice_red">
-						宇宙级重点
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="mainright_mingyi">
-			<img src="../images/mingyi.jpg">
-		</div>
-	</div>
+
 </div>
 
 <!--尾部-->

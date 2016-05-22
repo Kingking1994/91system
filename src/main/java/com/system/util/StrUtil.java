@@ -40,6 +40,9 @@ public final class StrUtil {
      * @return
      */
     public static boolean isNum(String input){
+        if(isBlank(input)){
+            return false;
+        }
         Pattern pattern = Pattern.compile("^\\d+$");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();

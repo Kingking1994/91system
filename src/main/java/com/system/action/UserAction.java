@@ -34,8 +34,8 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      * @return
      */
     @Action(value = "register",results = {
-            @Result(name = "success",location = "../success.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
+            @Result(name = "failure",location = "../login.jsp")
     })
     public String userRegister(){
         try{
@@ -74,8 +74,8 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      * @return
      */
     @Action(value = "login",results = {
-            @Result(name = "success",location = "../success.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
+            @Result(name = "failure",location = "../login.jsp")
     })
     public String userLogin(){
         try {
@@ -107,7 +107,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      * @return
      */
     @Action(value = "logout",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../login.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String userLogout(){

@@ -14,6 +14,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
     private OfficeService officeService;
 
     @Action(value = "list",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../office_list.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String officeList(){
@@ -56,7 +57,7 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
 
 
     @Action(value = "info",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../office_info.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String officeInfo(){
@@ -70,6 +71,8 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
                 Hospital hospital = hospitalService.get(office.getHid());
                 LOGGER.info(hospital);
                 session.setAttribute("hospital",hospital);
+                Date today = new Date(System.currentTimeMillis());
+                session.setAttribute("today",today);//方便页面对时间的比较
                 return "success";
             }else{
              return "failure";

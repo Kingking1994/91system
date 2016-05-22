@@ -35,7 +35,7 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
 
 
     @Action(value = "list",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../hospital_list.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String hospitalList(){
@@ -56,7 +56,7 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
     }
 
     @Action(value = "info",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../hospital_info.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String hospitalInfo(){
@@ -66,7 +66,7 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
                 int hid = Integer.parseInt(hidString);
                 Hospital hospital = hospitalService.get(hid);
                 LOGGER.info(hospital);
-                session.setAttribute("hospital",hospital);
+                session.setAttribute("result",hospital);
                 return "success";
             }else{
                 return "failure";
