@@ -27,10 +27,6 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
 
     private OrderItem orderItem = new OrderItem();
 
-    private int sid;
-
-    private String oid;
-
     private static final Logger LOGGER = Logger.getLogger(OrderItemAction.class);
 
     @Autowired
@@ -67,16 +63,22 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      * @return
      */
     @Action(value = "order",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../ordering.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String order(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
+                    LOGGER.info(session.getAttribute("identify"));
                     LOGGER.info("该用户还没有完善个人信息");
                     return "failure";
                 }else{
+                    String sidString  = request.getParameter("sid");
+                    if(!StrUtil.isNum(sidString)){
+                        return "failure";
+                    }
+                    int sid = Integer.parseInt(sidString);
                     Schedule schedule = scheduleService.get(sid);
                     if(schedule.getNum() > schedule.getOrdernum()){
                         LOGGER.info(schedule);
@@ -107,6 +109,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                 return "failure";
             }
         }catch (Exception e){
+            e.printStackTrace();
             LOGGER.error(e);
             return "failure";
         }
@@ -210,6 +213,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                     LOGGER.info("该用户还没有完善个人信息");
                     return "failure";
                 }else{
+                    String oid = request.getParameter("oid");
                     OrderItem oTmp = orderItemService.get(oid);
                     Schedule sTmp = scheduleService.get(oTmp.getSid());
                     Date date = sTmp.getDate();
@@ -304,6 +308,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                     LOGGER.info("该用户还没有完善个人信息");
                     return "failure";
                 }else{
+                    String oid = request.getParameter("oid");
                     OrderItem orderItem = orderItemService.get(oid);
                     LOGGER.info(orderItem);
                     session.setAttribute("orderItem",orderItem);
@@ -372,21 +377,6 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
         return false;
     }
 
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(String oid) {
-        this.oid = oid;
-    }
-
-    public int getSid() {
-        return sid;
-    }
-
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
 
     public OrderItem getModel() {
         return orderItem;
