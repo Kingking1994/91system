@@ -5,6 +5,7 @@ $(document).ready(function(){
    findcontent();
    detailshow();
    settingchange();
+   dialogshow();
 });
 function change(obj){
     if($(obj).attr('class')=='banner_title2')
@@ -27,15 +28,15 @@ function settingchange(){
 
       $(this).addClass('current');
       $(this).siblings().removeClass('current');
-      if($(this).text()=="账号信息")
+      if($(this).text()=="账号信息"||$(this).text()=="交易记录")
       {
-         $(".account_setting").show();
-          $(".password").hide();
+         $(".lan_left").show();
+          $(".lan_right").hide();
       }
       else
       {
-         $(".password").show();
-          $(".account_setting").hide();
+         $(".lan_right").show();
+          $(".lan_left").hide();
       }
    });
 }
@@ -68,9 +69,15 @@ function detailshow(){
     $(".order_detail").show();
     $(".right_content .order_list").hide();
   });
-    $(".title a").bind('click',  function() {
+    $(".order_list .title a").bind('click',  function() {
     $(".order_detail").hide();
     $(".right_content .order_list").show();
   /* Act on the event */
 });
+}
+function dialogshow(){
+  $(".recharge_btn").bind('click',  function() {
+     $(".recharge_dialog").show();
+      $(".shadow").show();
+  });
 }
