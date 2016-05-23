@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -8,6 +15,7 @@
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrapValidator.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
+
 </head>
 <body>
 <!--头部-->
@@ -35,16 +43,15 @@
 		  				<img src="../images/erweima.gif">
 		  			</div>
 		  		</li>
-		  		<li>下载APP</li>
 		  		<li>咨询</li>
 		  		<li class="user">
 		  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					<div style="display: inline-block">夏洛克</div>
+					<div style="display: inline-block">${userPhone}</div>
 		  			<div class="usering" >
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;用户中心</span></a>
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;私人医生</span></a>
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-bell" aria-hidden="true">&nbsp;消息</span></a>
-		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-off" aria-hidden="true">&nbsp;退出</span></a>
+		  				<a href="<%=path%>/users/logout"><span class="glyphicon glyphicon-off" aria-hidden="true">&nbsp;退出</span></a>
 		  			</div>
 		  		</li>
 		  		<div class="clear"></div>
@@ -61,10 +68,10 @@
 		</div>
 	</div>
 	<div class="search">
-		<form action="" class="search_form">
+		<form action="searching.html" method="post" class="search_form">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		    <input type="text" value="" class="search_text" placeholder="医院、医生、或疾病名称"></input>
-		    <input type="submit" value="搜索" class="search_button"></input
+		    <input type="text" value="" class="search_text" placeholder="医院、医生、或疾病名称">
+		    <input type="submit" value="搜索" class="search_button">
 		</form>
 	</div>
     <div class="clear"></div>
@@ -78,54 +85,63 @@
 	<div class="doctor_information">
 		<div class="doctor_information_all">
 			<div class="doctor_information_img">
-				<img src="../images/doctor.jpg" alt="医生">
+				<img src="${doctor.path}" alt="医生">
 			</div>
 			<div class="doctor_information_name">
-				<div>夏洛克</div>
-				<div>广东省第二人民医院</div>
-				<div>儿科</div>
-				<div>主任医师</div>
+				<div><a href="<%=path%>/doctors/info?did=${doctor.did}">${doctor.name}</a></div>
+				<div><a href="<%=path%>/hospitals/info?hid=${hospital.hid}">${hospital.name}</a></div>
+				<div><a href="<%=path%>/offices/info?oid=${office.oid}">${office.name}</a></div>
+				<c:if test="${doctor.title eq 0}"><div>主任医师</div></c:if>
+				<c:if test="${doctor.title eq 1}"><div>副主任医师</div></c:if>
+				<c:if test="${doctor.title eq 2}"><div>主治医师</div></c:if>
 			</div>
 		</div>
 		<div class="doctor_money">
-			<div>门诊类型：<span>儿科</span></div>
-			<div>挂号费用：<span>9.00</span>元</div>
+			<div>门诊类型：<span><a href="<%=path%>/offices/info?oid=${office.oid}">${office.name}</a></span></div>
+			<div>挂号费用：<span>${schedule.fee}</span>元</div>
 		</div>
 	</div>
+
+	<!--订单提交信息-->
+	<form action="submit" method="post">
+
 	<div class="doctor_time">
 		<div>就诊时间（必填）</div>
-		<h2></h2><span></span>
+		<div>${schedule.date}</div>
 		<hr>
 		<div class="doctor_time_list">
-			<p><input type="radio" name="time" /><span>9:00-9:25</span></p>
-			<p><input type="radio" name="time" /><span>9:30-9:55</span></p>
-			<p><input type="radio" name="time" /><span>10:00-10:25</span></p>
-			<p><input type="radio" name="time" /><span>10:30-10:55</span></p>
-			<p><input type="radio" name="time" /><span>11:00-11:25</span></p>
-			<p><input type="radio" name="time" /><span>11:30-11:55</span></p>
-			<p><input type="radio" name="time" /><span>14:00-14:25</span></p>
-			<p><input type="radio" name="time" /><span>14:30-14:55</span></p>
-			<p><input type="radio" name="time" /><span>15:00-15:25</span></p>
-			<p><input type="radio" name="time" /><span>15:30-15:55</span></p>
-			<p><input type="radio" name="time" /><span>16:00-16:25</span></p>
-			<p><input type="radio" name="time" /><span>16:30-15:55</span></p>
+			<c:if test="${schedule.time eq 0}">
+			<p><input type="radio" name="timing" value="9:00:00"/><span>9:00:00</span></p>
+			<p><input type="radio" name="timing" value="9:30:00"/><span>9:30:00</span></p>
+			<p><input type="radio" name="timing" value="10:00:00"/><span>10:00:00</span></p>
+			<p><input type="radio" name="timing" value="10:30:00"/><span>10:30:00</span></p>
+			<p><input type="radio" name="timing" value="11:00:00"/><span>11:00:00</span></p>
+			<p><input type="radio" name="timing" value="11:30:00"/><span>11:30:00</span></p>
+			</c:if>
+			<c:if test="${schedule.time eq 1}">
+			<p><input type="radio" name="timing" value="14:00:00"/><span>14:00:00</span></p>
+			<p><input type="radio" name="timing" value="14:30:00"/><span>14:30:00</span></p>
+			<p><input type="radio" name="timing" value="15:00:00"/><span>15:00:00</span></p>
+			<p><input type="radio" name="timing" value="15:30:00"/><span>15:30:00</span></p>
+			<p><input type="radio" name="timing" value="16:00:00"/><span>16:00:00</span></p>
+			<p><input type="radio" name="timing" value="16:30:00"/><span>16:30:00</span></p>
+			</c:if>
 		</div>
 	</div>
+
 	<div class="doctor_patient">
 		<div>就诊人信息</div>
 		<div>
-			<input type="radio" checked/>
-			<span>夏洛克</span>
-			<span>身份证123123133333333333</span>
-			<span>2099-09-09</span>
-			<span>18812344321</span>
-			<input type="button" value="更改就诊人" />
+			<span>姓名<input type="text" name="patient.pname" value="${userInfo.name}"></span>
+			<span>性别<input type="text" name="patient.pgender" value="${userInfo.gender}"></span>
+			<span>出生日期<input type="text" name="patient.pbirthday" value="${userInfo.birthday}"></span>
+			<span>手机号码<input type="text" name="patient.pphone" value="${userInfo.phone}"></span>
 		</div>
 	</div>
 	<div class="doctor_sick">
 		<div>疾病信息</div>
 		<div>
-			<textarea placeholder="请填写病史，症状，发病时间，接受过的治疗等信息，提前告知医生您的病情，有助于医生对您的诊疗。"></textarea>
+			<textarea name="patient.pinfo" placeholder="请填写病史，症状，发病时间，接受过的治疗等信息，提前告知医生您的病情，有助于医生对您的诊疗。"></textarea>
 		</div>
 		<img src="../images/sick.png">
 	</div>
@@ -148,19 +164,19 @@
 		</div>
 	</div>
 	<div class="doctor_submit">
-		<button>提交订单</button>
+		<button><input type="submit" value="提交订单"></button>
 		<div class="form-group doctor_sure">
             <label class="control-label" id="captchaOperation"></label>
             <div class="doctor_sure_input">
-                <input type="text" id="number" class="form-control" name="captcha" />
+                <input type="text" id="number" class="form-control" />
             </div>
             <span id="sure_information"></span>
         </div>
 	</div>
 
+	</form>
 
 </div>
-
 <!--尾部-->
 <div class="footer">
 	<img src="../images/footer.png">
