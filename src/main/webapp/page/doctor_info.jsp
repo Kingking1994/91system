@@ -66,7 +66,7 @@
 <div class="doctor">
 	<div class="doctor_title">
 		<div class="doctor_img">
-			<img src="../images/doctor.jpg" alt="医生">
+			<img src="${doctor.path}" alt="医生">
 		</div>
 		<div class="doctor_name">
 			<div>${doctor.name}</div>
