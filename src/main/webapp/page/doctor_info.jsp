@@ -262,10 +262,6 @@
 		<div class="mainpage_right">
 			<h3>医生擅长</h3>
 			<p>${doctor.goodat}</p>
-			<br>
-			<br>
-			<h3>医生简介</h3>
-			<p>${doctor.intro}</p>
 		</div>
 	</div>
 
