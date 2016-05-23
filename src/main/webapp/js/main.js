@@ -18,15 +18,15 @@ $(document).ready(function(){
 	$(".doctor_time>span").html(whatTime((d.getDate()-1)%7));
 
 
-	$(".doctor_time_list p").each(function(index){
-		$(this).click(function(){
-			$(".doctor_time_list p input").removeAttr("checked");
-			$(".doctor_time_list p").css("background", "#EDEDED");
-			$(this).find("input").attr("checked",true);
-			$(this).find("input").attr("value",index);
-			$(this).css("background", "#FFFFFF");
-		});
-	});
+	//$(".doctor_time_list p").each(function(index){
+	//	$(this).click(function(){
+	//		$(".doctor_time_list p input").removeAttr("checked");
+	//		$(".doctor_time_list p").css("background", "#EDEDED");
+	//		$(this).find("input").attr("checked",true);
+	//		$(this).find("input").attr("value",index);
+	//		$(this).css("background", "#FFFFFF");
+	//	});
+	//});
 
 	function randomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
