@@ -168,13 +168,28 @@
     	    </div>
             <div class="lan_left">
     	    <div class="account_setting">
-    	    	<ul>
-    	    		<li>姓名:用户名</li>
-    	    		<li>证件号码：</li>
-    	    		<li>性别：男</li>
-    	    		<li>手机：</li>
-    	    		<li>邮箱：</li>
-    	    	</ul>
+            <form>
+              <table>
+                  <tr>
+                      <td>姓名：</td>
+                      <td><input/></td>
+                  </tr>
+                    <tr>
+                      <td>证件：</td>
+                      <td><input/></td>
+                  </tr>
+                    <tr>
+                      <td>手机：</td>
+                      <td><input/></td>
+                  </tr>
+                    <tr>
+                      <td>邮箱：</td>
+                      <td><input/></td>
+                  </tr>
+                    <input type="submit" class="register_btn save fr" value="保存" />
+                 
+              </table>
+              </form>
     	    </div>
             </div>
             <div class="lan_right" style="display: none;">
@@ -247,9 +262,9 @@
                  </div>
                  <div class="dialog_main">
                      充值金额:
-                     <input/>元
+                     <input value="30" />元
                     <ul class="fr">
-                        <li>30元</li>
+                        <li class="cur">30元</li>
                         <li>50元</li>
                         <li>100元</li>
                     </ul>

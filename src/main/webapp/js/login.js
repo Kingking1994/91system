@@ -69,7 +69,7 @@ function detailshow(){
     $(".order_detail").show();
     $(".right_content .order_list").hide();
   });
-    $(".order_list .title a").bind('click',  function() {
+    $(".order_detail .title a").bind('click',  function() {
     $(".order_detail").hide();
     $(".right_content .order_list").show();
   /* Act on the event */
@@ -80,4 +80,18 @@ function dialogshow(){
      $(".recharge_dialog").show();
       $(".shadow").show();
   });
+   $(".dialog_title a").bind('click',  function() {
+     $(".recharge_dialog").hide();
+      $(".shadow").hide();
+  });
+   $(".dialog_main ul ").delegate('li','click',function(){
+      $(this).addClass('cur');
+      $(this).siblings().removeClass('cur');
+      var nu=$(this).text();
+      var index=nu.indexOf('元');
+      nu=nu.substring(0,index);
+     $(".dialog_main input").attr({
+       'value':nu ,
+     });
+   });
 }
