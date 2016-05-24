@@ -38,7 +38,7 @@ public class SearchAction extends SuperAction {
 
 
     @Action(value = "all" ,results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../search_result.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String search(){
@@ -64,6 +64,8 @@ public class SearchAction extends SuperAction {
                 session.setAttribute("hospitalPager",hospitalPager);
                 session.setAttribute("officePager",officePager);
                 session.setAttribute("doctorPager",doctorPager);
+                //把查询语句保存在session中，以便页面显示以及更多的操作可以获取到该searchString
+                session.setAttribute("searchString",searchString);
                 return "success";
             }else{
                 return "failure";
@@ -76,7 +78,7 @@ public class SearchAction extends SuperAction {
 
 
     @Action(value = "hospitals" ,results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../search_h_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String search_Hospital_more(){
@@ -87,7 +89,7 @@ public class SearchAction extends SuperAction {
                 pageNum = Integer.parseInt(pageNumString);
             }
             Hospital h = new Hospital();
-            h.setName(searchString);
+            h.setName((String)session.getAttribute("searchString"));//可以使得更多，翻页操作可以在同一查询条件下
             Pager<Hospital> hospitalPager = hospitalService.findHospital(h,pageNum, Constant.DEAULT_PAGE_SIZE);
             LOGGER.info(hospitalPager);
 
@@ -100,7 +102,7 @@ public class SearchAction extends SuperAction {
     }
 
     @Action(value = "offices" ,results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../search_o_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String search_Office_more(){
@@ -111,7 +113,7 @@ public class SearchAction extends SuperAction {
                 pageNum = Integer.parseInt(pageNumString);
             }
             Office o = new Office();
-            o.setName(searchString);
+            o.setName((String)session.getAttribute("searchString"));
             Pager<Office> officePager = officeService.findOffice(o, pageNum, Constant.DEAULT_PAGE_SIZE);
             LOGGER.info(officePager);
 
@@ -124,7 +126,7 @@ public class SearchAction extends SuperAction {
     }
 
     @Action(value = "doctors" ,results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../search_d_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String search_Doctor_more(){
@@ -135,7 +137,7 @@ public class SearchAction extends SuperAction {
                 pageNum = Integer.parseInt(pageNumString);
             }
             Doctor d = new Doctor();
-            d.setName(searchString);
+            d.setName((String)session.getAttribute("searchString"));
             Pager<Doctor> doctorPager = doctorService.findDoctor(d, pageNum, Constant.DEAULT_PAGE_SIZE);
             LOGGER.info(doctorPager);
 
