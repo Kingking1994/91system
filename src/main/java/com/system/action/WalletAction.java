@@ -40,12 +40,12 @@ public class WalletAction extends SuperAction {
     @Actions({
             //交易记录
             @Action(value = "trade",results = {
-                    @Result(name = "success",location = "../success.jsp"),
+                    @Result(name = "success",location = "../trade.jsp"),
                     @Result(name = "failure",location = "../failure.jsp")
             }),
             //退款记录
             @Action(value = "refund",results = {
-                    @Result(name = "success",location = "../success.jsp"),
+                    @Result(name = "success",location = "../refund.jsp"),
                     @Result(name = "failure",location = "../failure.jsp")
             })
     })
@@ -78,7 +78,7 @@ public class WalletAction extends SuperAction {
      * @return
      */
     @Action(value = "recharge",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "/wallets/trade" ,type = "redirect"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String recharge(){
