@@ -124,7 +124,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      * @return
      */
     @Action(value = "submit",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../orderItem_detail.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String submit(){
@@ -203,7 +203,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      * @return
      */
     @Action(value = "cancel",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "/orders/list" ,type = "redirect"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String cancel(){
@@ -213,8 +213,8 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                     LOGGER.info("该用户还没有完善个人信息");
                     return "failure";
                 }else{
-                    String oid = request.getParameter("oid");
-                    OrderItem oTmp = orderItemService.get(oid);
+                    String oiid = request.getParameter("oiid");
+                    OrderItem oTmp = orderItemService.get(oiid);
                     Schedule sTmp = scheduleService.get(oTmp.getSid());
                     Date date = sTmp.getDate();
                     Time time = oTmp.getTiming();
@@ -267,7 +267,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      * @return
      */
     @Action(value = "list",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../orderItem_list.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String orderList(){
@@ -298,7 +298,7 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      * @return
      */
     @Action(value = "detail",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../orderItem_detail.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String detail(){
@@ -308,8 +308,8 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                     LOGGER.info("该用户还没有完善个人信息");
                     return "failure";
                 }else{
-                    String oid = request.getParameter("oid");
-                    OrderItem orderItem = orderItemService.get(oid);
+                    String oiid = request.getParameter("oiid");
+                    OrderItem orderItem = orderItemService.get(oiid);
                     LOGGER.info(orderItem);
                     session.setAttribute("orderItem",orderItem);
                     Schedule schedule = scheduleService.get(orderItem.getSid());
@@ -338,18 +338,6 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
         }
     }
 
-
-
-//    @Action(value = "test",results = {
-//            @Result(name = "success",location = "../test.jsp")
-//    })
-//    public String test(){
-//        session.setAttribute("userPhone","18814122697");
-//        session.setAttribute("identify",1);
-//        session.setAttribute("schedule",scheduleService.get(1));
-//        session.setAttribute("userInfo",userInfoService.get(1));
-//        return "success";
-//    }
 
 
     /**
