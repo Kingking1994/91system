@@ -2,7 +2,9 @@ package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.entity.User;
+import com.system.entity.UserInfo;
 import com.system.enums.UserIdentifiedEnum;
+import com.system.service.UserInfoService;
 import com.system.service.UserService;
 import com.system.util.BeanUtil;
 import com.system.util.PatternUtil;
@@ -27,6 +29,9 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
 
     /**
@@ -94,6 +99,10 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                     LOGGER.info("登录成功 ： " + user.getPhone());
                     session.setAttribute("userPhone",user.getPhone());
                     session.setAttribute("identify",tmp.getIdentified());
+                    if(tmp.getIdentified() == UserIdentifiedEnum.YES.index){
+                        UserInfo userInfo = userInfoService.findByPhone(user.getPhone());
+                        session.setAttribute("userName",userInfo.getName());
+                    }
                     return "success";
                 }
             }
@@ -116,6 +125,9 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 LOGGER.info("logout : " + session.getAttribute("userPhone"));
                 session.removeAttribute("userPhone");
+                if ((Integer)session.getAttribute("identify") == UserIdentifiedEnum.YES.index){
+                    session.removeAttribute("identify");
+                }
                 session.invalidate();
             }
             return "success";
@@ -163,7 +175,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg", "用户没有登录");
                 return "failure";
             }
         }catch (Exception e){

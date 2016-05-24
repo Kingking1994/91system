@@ -109,6 +109,8 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                         tmp.setMarried(userInfo.getMarried());
                         userInfoService.saveOrUpdate(tmp);
                         LOGGER.info("成功修改个人信息");
+
+                        session.setAttribute("userName",tmp.getName());
                         return "success";
                     }else{
                         //未完善信息，需要更新user表，插入userInfo表，插入wallet表，更新session中的identify
@@ -120,7 +122,10 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                         Wallet w = new Wallet(0);//完善信息后，初始化钱包，金额为0
                         w.setUserInfo(userInfo);
                         walletService.save(w);
+
                         session.setAttribute("identify",UserIdentifiedEnum.YES.index);
+                        session.setAttribute("userName",userInfo.getName());
+
                         LOGGER.info("成功完善个人信息");
                         return "success";
                     }
