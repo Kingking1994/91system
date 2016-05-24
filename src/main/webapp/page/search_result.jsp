@@ -74,7 +74,7 @@
 	<div class="search">
 		<form action="<%=path%>/search/all" method="post" class="search_form">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-			<input type="text" value="" name="searchString" class="search_text" placeholder="医院、医生、或疾病名称">
+			<input type="text" value="${searchString}" name="searchString" class="search_text" placeholder="医院、医生、或疾病名称">
 			<input type="submit" value="搜索" class="search_button">
 		</form>
 	</div>
@@ -97,7 +97,7 @@
 
 	<div class="search_title clearfix">
 		<h2>相关医生</h2>
-		<a href="#">更多>></a>
+		<a href="<%=path%>/search/doctors">更多>></a>
 	</div>
 
 	<div class="search_main clearfix">
@@ -135,7 +135,7 @@
 
 	<div class="search_title clearfix">
 		<h2>相关科室</h2>
-		<a href="#">更多>></a>
+		<a href="<%=path%>/search/offices">更多>></a>
 	</div>
 
 	<div class="search_main">
@@ -178,7 +178,7 @@
 
     <div class="search_title clearfix">
 		<h2>相关医院</h2>
-		<a href="#">更多>></a>
+		<a href="<%=path%>/search/hospitals">更多>></a>
 	</div>
 
 	<div class="search_main">
