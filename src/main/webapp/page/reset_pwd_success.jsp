@@ -102,9 +102,15 @@
 		</div>
 		<div class="user_menu tabs">
 		<ul>
-				<li class="user_f">订单管理</li>
-				<li class="user_f">账号设置</li>
-				<li class="user_f">钱包管理</li>
+			<li class="user_f">
+				<a href="<%=path%>/orders/list">订单管理</a>
+			</li>
+			<li class="user_f">
+				<a href="<%=path%>/users/info">账号设置</a>
+			</li>
+			<li class="user_f">
+				<a href="<%=path%>/wallets/trade">钱包管理</a>
+			</li>
 		</ul>
 		</div>
 	</div>
