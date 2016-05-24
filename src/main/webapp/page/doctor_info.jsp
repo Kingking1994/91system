@@ -44,7 +44,12 @@
 		  		<li>咨询</li>
 		  		<li class="user">
 		  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					<div style="display: inline-block">${userPhone}</div>
+					<c:if test="${identify eq 0}">
+						<div style="display: inline-block">${userPhone}</div>
+					</c:if>
+					<c:if test="${identify eq 1}">
+						<div style="display: inline-block">${userName}</div>
+					</c:if>
 		  			<div class="usering" >
 		  				<a href="<%=path%>/orders/list"><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;用户中心</span></a>
 		  				<a href="http://www.baidu.com"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;私人医生</span></a>
