@@ -74,7 +74,7 @@
 	<div class="search">
 		<form action="<%=path%>/search/all" method="post" class="search_form">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-			<input type="text" value="" name="searchString" class="search_text" placeholder="医院、医生、或疾病名称">
+			<input type="text" value="" name="searchString" class="search_text" placeholder="医院、科室、或医生名称">
 			<input type="submit" value="搜索" class="search_button">
 		</form>
 	</div>
