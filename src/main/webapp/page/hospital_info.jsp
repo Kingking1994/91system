@@ -71,10 +71,10 @@
 		</div>
 	</div>
 	<div class="search">
-		<form action="" class="search_form">
+		<form action="<%=path%>/search/all" method="post" class="search_form">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		    <input type="text" value="" class="search_text" placeholder="医院、医生、或疾病名称"></input>
-		    <input type="submit" value="搜索" class="search_button"></input
+			<input type="text" value="" name="searchString" class="search_text" placeholder="医院、医生、或疾病名称">
+			<input type="submit" value="搜索" class="search_button">
 		</form>
 	</div>
     <div class="clear"></div>
