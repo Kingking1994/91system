@@ -48,7 +48,7 @@
 					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					<div style="display: inline-block">${userPhone}</div>
 					<div class="usering" >
-						<a href="http://www.baidu.com"><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;用户中心</span></a>
+						<a href="<%=path%>/orders/list"><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;用户中心</span></a>
 						<a href="http://www.baidu.com"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;私人医生</span></a>
 						<a href="http://www.baidu.com"><span class="glyphicon glyphicon-bell" aria-hidden="true">&nbsp;消息</span></a>
 						<a href="<%=path%>/users/logout"><span class="glyphicon glyphicon-off" aria-hidden="true">&nbsp;退出</span></a>
