@@ -131,7 +131,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      * @return
      */
     @Action(value = "password",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../reset_pwd_success.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String userPwd(){
