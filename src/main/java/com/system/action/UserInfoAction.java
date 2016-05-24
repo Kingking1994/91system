@@ -42,7 +42,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      * @return
      */
     @Action(value = "info_set",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../userInfo.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String infoSet(){
@@ -78,7 +78,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      * @return
      */
     @Action(value = "info_save",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "/users/info" ,type = "redirect"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String infoSaveOrUpdate(){
@@ -87,7 +87,27 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                 if(BeanUtil.nonNull(userInfo)){
                     int identify = (Integer)session.getAttribute("identify");
                     if(identify == UserIdentifiedEnum.YES.index){//已经完善个人信息，只需要更新信息
-                        userInfoService.saveOrUpdate(userInfo);
+                        /**
+                         * org.hibernate.NonUniqueObjectException
+                         * 设置userInfo的uiid，uid之后
+                         * 直接saveOrUpdate（userInfo），
+                         * 就会报NonUniqueObjectException，
+                         * 所以在不改变其他代码的情况下，选了以下的解决方案
+                         *
+                         * 这个异常的原因是当前hibernate的session中已经存在一个相同标识符的po。
+                         */
+                        UserInfo tmp = (UserInfo)session.getAttribute("userInfo");
+                        tmp.setName(userInfo.getName());
+                        tmp.setPhone(userInfo.getPhone());
+                        tmp.setGender(userInfo.getGender());
+                        tmp.setBirthday(userInfo.getBirthday());
+                        tmp.setIdcard(userInfo.getIdcard());
+                        tmp.setAddress(userInfo.getAddress());
+                        tmp.setEmail(userInfo.getEmail());
+                        tmp.setBlood(userInfo.getBlood());
+                        tmp.setCareer(userInfo.getCareer());
+                        tmp.setMarried(userInfo.getMarried());
+                        userInfoService.saveOrUpdate(tmp);
                         LOGGER.info("成功修改个人信息");
                         return "success";
                     }else{
@@ -125,7 +145,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      * @return
      */
     @Action(value = "info",results = {
-            @Result(name = "success",location = "../success.jsp"),
+            @Result(name = "success",location = "../userInfo.jsp"),
             @Result(name = "failure",location = "../failure.jsp")
     })
     public String infoShow(){
