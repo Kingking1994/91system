@@ -80,9 +80,9 @@
 <div class="tag">
 	<div class="tag_content">
 		<ul>
-			<li>找医院</li>
-			<li>找科室</li>
-			<li>找医生</li>
+			<li ><a href="<%=path%>/hospitals/list">找医院</a></li>
+			<li ><a href="<%=path%>/offices/list">找科室</a></li>
+			<li ><a href="<%=path%>/doctors/list">找医生</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
