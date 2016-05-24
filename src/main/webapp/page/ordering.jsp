@@ -95,15 +95,15 @@
 				<c:if test="${doctor.title eq 1}"><div>副主任医师</div></c:if>
 				<c:if test="${doctor.title eq 2}"><div>主治医师</div></c:if>
 			</div>
-		</div>
-		<div class="doctor_money">
-			<div>门诊类型：<span><a href="<%=path%>/offices/info?oid=${office.oid}">${office.name}</a></span></div>
-			<div>挂号费用：<span>${schedule.fee}</span>元</div>
-		</div>
-	</div>
+</div>
+<div class="doctor_money">
+	<div>门诊类型：<span><a href="<%=path%>/offices/info?oid=${office.oid}">${office.name}</a></span></div>
+	<div>挂号费用：<span>${schedule.fee}</span>元</div>
+</div>
+</div>
 
-	<!--订单提交信息-->
-	<form action="submit" method="post">
+<!--订单提交信息-->
+<form action="submit" method="post">
 
 	<div class="doctor_time">
 		<div>就诊时间（必填）</div>

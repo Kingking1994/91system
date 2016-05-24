@@ -127,7 +127,7 @@
 						<a href="<%=path%>/users/info">账号信息</a>
 					</li>
     	    		<li >
-						<a href="reset_password.jsp">修改密码</a>
+						<a href="<%=path%>/page/reset_password.jsp">修改密码</a>
 					</li>
     	    	</ul>
     	    </div>

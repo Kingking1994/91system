@@ -29,7 +29,7 @@
 				alert("已经是第一页数据");
 				return false;
 			}else{
-				var url = "<%=path%>/hospitals/list?pageNum= 1";
+				var url = "<%=path%>/hospitals/list?pageNum=1";
 				location.href = url;
 				return true;
 			}

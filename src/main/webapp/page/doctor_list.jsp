@@ -29,7 +29,7 @@
 				alert("已经是第一页数据");
 				return false;
 			}else{
-				var url = "<%=path%>/doctors/list?pageNum= 1";
+				var url = "<%=path%>/doctors/list?pageNum=1";
 				location.href = url;
 				return true;
 			}
@@ -135,9 +135,9 @@
 <div class="tag">
 	<div class="tag_content">
 		<ul>
-			<li ><a href="<%=path%>/hospitals/list">">找医院</a></li>
-			<li ><a href="<%=path%>/offices/list">">找科室</a></li>
-			<li class="active"><a href="<%=path%>/doctors/list">">找医生</a></li>
+			<li ><a href="<%=path%>/hospitals/list">找医院</a></li>
+			<li ><a href="<%=path%>/offices/list">找科室</a></li>
+			<li class="active"><a href="<%=path%>/doctors/list">找医生</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
