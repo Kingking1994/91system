@@ -194,6 +194,11 @@
 					</div>
 					<div class="mainlist_mid">
 						<a href="<%=path%>/offices/info?oid=${office.oid}"><h3>${office.name}</h3></a>
+						<c:if test="${office.level eq 0}"><span>普通科室</span></c:if>
+						<c:if test="${office.level eq 1}"><span>国级科室</span></c:if>
+						<c:if test="${office.level eq 2}"><span>省级科室</span></c:if>
+						<c:if test="${office.level eq 3}"><span>市级科室</span></c:if>
+						<c:if test="${office.level eq 4}"><span>区级科室</span></c:if>
 							<%--<span class="glyphicon glyphicon-ok-circle" aria-hidden="true">12</span>--%>
 							<%--<span class="glyphicon glyphicon-question-sign" aria-hidden="true">0</span>--%>
 							<%--<span class="glyphicon glyphicon-plus" aria-hidden="true">0</span>--%>
