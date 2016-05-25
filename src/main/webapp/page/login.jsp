@@ -66,7 +66,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
             </ul>
         </form>
-        <div><span>${errorMsg}</span></div>
     </div>
 </div>
 </body>
