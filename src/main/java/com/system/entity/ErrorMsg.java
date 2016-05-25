@@ -1,10 +1,12 @@
 package com.system.entity;
 
+import java.io.Serializable;
+
 /**
  * 错误信息类
  * Created by king on 2016/5/25.
  */
-public class ErrorMsg {
+public class ErrorMsg implements Serializable{
 
     public int code;
 
