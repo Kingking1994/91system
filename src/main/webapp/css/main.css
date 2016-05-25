@@ -859,3 +859,21 @@
 	width: 100px;
 	display: inline-block;
 }
+
+.errorbox{
+	width:1000px;
+	height:300px;
+	margin: 0 auto;
+	border:1px solid #D7D4D4;
+	padding: 30px 200px 0 200px;
+}
+.errorText{
+	width: 600px;
+	height: 160px;
+	background-color: #FBDBDB;
+	line-height: 160px;
+	padding-top: 30px;
+}
+.errorbox button{
+	margin: 10px 90px;
+}
