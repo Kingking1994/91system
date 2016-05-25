@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/login.css">
-    <script src="http://www.imooc.com/data/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
     <script src="../js/login.js" type="text/javascript"></script>
 </head>
 <body>
