@@ -64,7 +64,8 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      */
     @Action(value = "order",results = {
             @Result(name = "success",location = "../ordering.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
+
     })
     public String order(){
         try {
@@ -72,10 +73,13 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info(session.getAttribute("identify"));
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     String sidString  = request.getParameter("sid");
                     if(!StrUtil.isNum(sidString)){
+                        LOGGER.warn("非法的参数输入");
+                        session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                         return "failure";
                     }
                     int sid = Integer.parseInt(sidString);
@@ -99,18 +103,19 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                         return "success";
                     }else{
                         LOGGER.warn("没有多的预约号了，已经预约满了");
-                        session.setAttribute("errorMsg","没有多的预约号了，已经预约满了");
+                        session.setAttribute("errorMsg",new ErrorMsg(104,"预约已经满了"));
                         return "failure";
                     }
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             e.printStackTrace();
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -125,13 +130,14 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      */
     @Action(value = "submit",results = {
             @Result(name = "success",location = "../orderItem_detail.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String submit(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     //更新预约剩余数量
@@ -172,26 +178,28 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
 
                             }else{
                                 LOGGER.warn("没有足够的钱支付");
-                                session.setAttribute("errorMsg","没有足够的钱支付");
+                                session.setAttribute("errorMsg",new ErrorMsg(105,"钱包余额不足"));
                                 return "failure";
                             }
                         }else{
                             LOGGER.warn("orderItem == null");
+                            session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                             return "failure";
                         }
                     }else{
                         LOGGER.warn("没有多的预约号了，已经预约满了");
-                        session.setAttribute("errorMsg","没有多的预约号了，已经预约满了");
+                        session.setAttribute("errorMsg",new ErrorMsg(104,"预约已经满了"));
                         return "failure";
                     }
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -204,13 +212,14 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      */
     @Action(value = "cancel",results = {
             @Result(name = "success",location = "/orders/list" ,type = "redirect"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String cancel(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     String oiid = request.getParameter("oiid");
@@ -246,17 +255,18 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                         return "success";
                     }else{
                         LOGGER.warn("已经超出退款期限，请在就诊前24小时申请退款");
-                        session.setAttribute("errorMsg","已经超出退款期限，请在就诊前24小时申请退款");
+                        session.setAttribute("errorMsg",new ErrorMsg(106,"超出退款期限"));
                         return "failure";
                     }
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -268,13 +278,14 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      */
     @Action(value = "list",results = {
             @Result(name = "success",location = "../orderItem_list.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String orderList(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     UserInfo uTmp = userInfoService.findByPhone((String) session.getAttribute("userPhone"));
@@ -283,11 +294,12 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -299,13 +311,14 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
      */
     @Action(value = "detail",results = {
             @Result(name = "success",location = "../orderItem_detail.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String detail(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     String oiid = request.getParameter("oiid");
@@ -329,11 +342,12 @@ public class OrderItemAction extends SuperAction implements ModelDriven<OrderIte
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

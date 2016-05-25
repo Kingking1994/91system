@@ -1,10 +1,7 @@
 package com.system.action;
 
 
-import com.system.entity.Doctor;
-import com.system.entity.Hospital;
-import com.system.entity.Office;
-import com.system.entity.Pager;
+import com.system.entity.*;
 import com.system.enums.Constant;
 import com.system.service.DoctorService;
 import com.system.service.HospitalService;
@@ -39,7 +36,7 @@ public class SearchAction extends SuperAction {
 
     @Action(value = "all" ,results = {
             @Result(name = "success",location = "../search_result.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String search(){
         try {
@@ -68,10 +65,13 @@ public class SearchAction extends SuperAction {
                 session.setAttribute("searchString",searchString);
                 return "success";
             }else{
+                LOGGER.warn("非法的参数输入");
+                session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -79,7 +79,7 @@ public class SearchAction extends SuperAction {
 
     @Action(value = "hospitals" ,results = {
             @Result(name = "success",location = "../search_h_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String search_Hospital_more(){
         try {
@@ -97,13 +97,14 @@ public class SearchAction extends SuperAction {
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "offices" ,results = {
             @Result(name = "success",location = "../search_o_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String search_Office_more(){
         try {
@@ -121,13 +122,14 @@ public class SearchAction extends SuperAction {
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "doctors" ,results = {
             @Result(name = "success",location = "../search_d_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String search_Doctor_more(){
         try {
@@ -145,6 +147,7 @@ public class SearchAction extends SuperAction {
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

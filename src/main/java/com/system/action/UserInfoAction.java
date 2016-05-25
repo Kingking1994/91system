@@ -1,6 +1,7 @@
 package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.system.entity.ErrorMsg;
 import com.system.entity.User;
 import com.system.entity.UserInfo;
 import com.system.entity.Wallet;
@@ -43,7 +44,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info_set",results = {
             @Result(name = "success",location = "../userInfo.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String infoSet(){
         try {
@@ -63,11 +64,12 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -79,7 +81,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info_save",results = {
             @Result(name = "success",location = "/users/info" ,type = "redirect"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String infoSaveOrUpdate(){
         try {
@@ -131,15 +133,17 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                     }
                 }else{
                     LOGGER.warn("userInfo == null");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -151,13 +155,14 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info",results = {
             @Result(name = "success",location = "../userInfo.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String infoShow(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     UserInfo tmp = userInfoService.findByPhone((String) session.getAttribute("userPhone"));
@@ -167,11 +172,12 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

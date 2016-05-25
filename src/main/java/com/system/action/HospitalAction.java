@@ -1,6 +1,7 @@
 package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.system.entity.ErrorMsg;
 import com.system.entity.Hospital;
 import com.system.entity.Office;
 import com.system.entity.Pager;
@@ -36,7 +37,7 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
 
     @Action(value = "list",results = {
             @Result(name = "success",location = "../hospital_list.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String hospitalList(){
         try {
@@ -51,13 +52,14 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "info",results = {
             @Result(name = "success",location = "../hospital_info.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String hospitalInfo(){
         try{
@@ -69,10 +71,12 @@ public class HospitalAction extends SuperAction implements ModelDriven<Hospital>
                 session.setAttribute("result",hospital);
                 return "success";
             }else{
+                session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

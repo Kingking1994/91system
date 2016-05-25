@@ -1,10 +1,7 @@
 package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.system.entity.Doctor;
-import com.system.entity.Hospital;
-import com.system.entity.Office;
-import com.system.entity.Pager;
+import com.system.entity.*;
 import com.system.enums.Constant;
 import com.system.service.DoctorService;
 import com.system.service.HospitalService;
@@ -41,7 +38,7 @@ public class DoctorAction extends SuperAction implements ModelDriven<Doctor>{
 
     @Action(value = "list",results = {
             @Result(name = "success",location = "../doctor_list.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String doctorList(){
         try{
@@ -56,6 +53,7 @@ public class DoctorAction extends SuperAction implements ModelDriven<Doctor>{
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -63,7 +61,7 @@ public class DoctorAction extends SuperAction implements ModelDriven<Doctor>{
 
     @Action(value = "info",results = {
             @Result(name = "success",location = "../doctor_info.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String doctorInfo(){
         try {
@@ -83,10 +81,12 @@ public class DoctorAction extends SuperAction implements ModelDriven<Doctor>{
                 session.setAttribute("today",today);//方便页面对时间的比较
                 return "success";
             }else{
+                session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

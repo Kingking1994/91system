@@ -1,5 +1,6 @@
 package com.system.action;
 
+import com.system.entity.ErrorMsg;
 import com.system.entity.UserInfo;
 import com.system.entity.Wallet;
 import com.system.enums.UserIdentifiedEnum;
@@ -41,12 +42,12 @@ public class WalletAction extends SuperAction {
             //交易记录
             @Action(value = "trade",results = {
                     @Result(name = "success",location = "../trade.jsp"),
-                    @Result(name = "failure",location = "../failure.jsp")
+                    @Result(name = "failure",location = "../errorMsg.jsp")
             }),
             //退款记录
             @Action(value = "refund",results = {
                     @Result(name = "success",location = "../refund.jsp"),
-                    @Result(name = "failure",location = "../failure.jsp")
+                    @Result(name = "failure",location = "../errorMsg.jsp")
             })
     })
     public String wallet(){
@@ -54,6 +55,7 @@ public class WalletAction extends SuperAction {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     UserInfo u = userInfoService.findByPhone((String) session.getAttribute("userPhone"));
@@ -63,11 +65,12 @@ public class WalletAction extends SuperAction {
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -79,13 +82,14 @@ public class WalletAction extends SuperAction {
      */
     @Action(value = "recharge",results = {
             @Result(name = "success",location = "/wallets/trade" ,type = "redirect"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String recharge(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("userPhone"))){
                 if((Integer)session.getAttribute("identify") == UserIdentifiedEnum.NO.index){
                     LOGGER.info("该用户还没有完善个人信息");
+                    session.setAttribute("errorMsg",new ErrorMsg(103,"用户没有完善个人资料"));
                     return "failure";
                 }else{
                     UserInfo u = userInfoService.findByPhone((String) session.getAttribute("userPhone"));
@@ -98,11 +102,12 @@ public class WalletAction extends SuperAction {
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg","用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

@@ -1,6 +1,7 @@
 package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.system.entity.ErrorMsg;
 import com.system.entity.Hospital;
 import com.system.entity.Office;
 import com.system.entity.Pager;
@@ -36,7 +37,7 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
 
     @Action(value = "list",results = {
             @Result(name = "success",location = "../office_list.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String officeList(){
         try {
@@ -51,6 +52,7 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -58,7 +60,7 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
 
     @Action(value = "info",results = {
             @Result(name = "success",location = "../office_info.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String officeInfo(){
         try {
@@ -75,10 +77,12 @@ public class OfficeAction extends SuperAction implements ModelDriven<Office>{
                 session.setAttribute("today",today);//方便页面对时间的比较
                 return "success";
             }else{
-             return "failure";
+                session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
+                return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

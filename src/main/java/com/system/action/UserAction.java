@@ -1,6 +1,7 @@
 package com.system.action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.system.entity.ErrorMsg;
 import com.system.entity.User;
 import com.system.entity.UserInfo;
 import com.system.enums.UserIdentifiedEnum;
@@ -41,7 +42,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "register",results = {
             @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
-            @Result(name = "failure",location = "/home/welcomeUser" , type = "redirect")
+            @Result(name = "failure",location = "../errorMsg.jsp" )
     })
     public String userRegister(){
         try{
@@ -56,21 +57,22 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                         return "success";
                     }else{
                         LOGGER.warn("密码长度不对或者包含特殊字符");
-                        session.setAttribute("errorMsg","密码长度不对或者包含特殊字符");
+                        session.setAttribute("errorMsg",new ErrorMsg(107,"密码格式不对"));
                         return "failure";
                     }
                 }else{
                     LOGGER.warn("电话号码已经被注册: " + user.getPhone());
-                    session.setAttribute("errorMsg","电话号码已经被注册");
+                    session.setAttribute("errorMsg",new ErrorMsg(108,"手机号码已经被注册"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("这不是一个手机号码");
-                session.setAttribute("errorMsg","这不是一个手机号码");
+                session.setAttribute("errorMsg",new ErrorMsg(109,"手机号码格式不对"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -81,19 +83,19 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "login",results = {
             @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
-            @Result(name = "failure",location = "/home/welcomeUser" , type = "redirect")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String userLogin(){
         try {
             User tmp = userService.findByPhone(user.getPhone());
             if (BeanUtil.isNull(tmp)){
                 LOGGER.warn("该用户不存在： " + user.getPhone());
-                session.setAttribute("errorMsg","该用户不存在");
+                session.setAttribute("errorMsg",new ErrorMsg(110,"该用户不存在"));
                 return "failure";
             }else{
                 if (!tmp.getPassword().equals(user.getPassword())){
                     LOGGER.warn("密码不正确");
-                    session.setAttribute("errorMsg","密码不正确");
+                    session.setAttribute("errorMsg",new ErrorMsg(111,"密码不正确"));
                     return "failure";
                 }else{
                     LOGGER.info("登录成功 ： " + user.getPhone());
@@ -108,6 +110,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -118,7 +121,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "logout",results = {
             @Result(name = "success",location = "/home/welcomeUser" , type = "redirect"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String userLogout(){
         try {
@@ -133,6 +136,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -144,7 +148,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "password",results = {
             @Result(name = "success",location = "../reset_pwd_success.jsp"),
-            @Result(name = "failure",location = "../failure.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp")
     })
     public String userPwd(){
         try {
@@ -160,26 +164,27 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
                             return "success";
                         }else{
                             LOGGER.warn("新密码不合规范");
-                            session.setAttribute("errorMsg","新密码不合规范");
+                            session.setAttribute("errorMsg",new ErrorMsg(107,"密码格式不对"));
                             return "failure";
                         }
                     }else{
                         LOGGER.warn("原密码错误");
-                        session.setAttribute("errorMsg","原密码错误");
+                        session.setAttribute("errorMsg",new ErrorMsg(111,"密码不正确"));
                         return "failure";
                     }
                 }else{
                     LOGGER.warn("该用户不存在： " + user.getPhone());
-                    session.setAttribute("errorMsg","该用户不存在");
+                    session.setAttribute("errorMsg",new ErrorMsg(110,"该用户不存在"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("用户没有登录");
-                session.setAttribute("errorMsg", "用户没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
