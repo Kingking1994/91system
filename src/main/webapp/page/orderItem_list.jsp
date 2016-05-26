@@ -152,18 +152,26 @@
     					<li>${orderItem.patient.pname}</li>
 						<c:if test="${orderItem.status eq 0}">
     					<li>成功预约</li>
-						</c:if>
-						<c:if test="${orderItem.status eq 1}">
-						<li>已取消</li>
-						</c:if>
-						<li>
+							<li>
 							<span>
 								<a href="<%=path%>/orders/detail?oiid=${orderItem.oiid}">查看</a>
 							</span>
 							<span>
 								<a href="<%=path%>/orders/cancel?oiid=${orderItem.oiid}">取消</a>
 							</span>
-						</li>
+							</li>
+						</c:if>
+						<c:if test="${orderItem.status eq 1}">
+						<li>已取消</li>
+							<li>
+							<span>
+								<a href="<%=path%>/orders/detail?oiid=${orderItem.oiid}">查看</a>
+							</span>
+							<span>
+								取消
+							</span>
+							</li>
+						</c:if>
     				</ul>
     			</div>
     		</div>
