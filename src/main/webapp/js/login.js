@@ -23,6 +23,23 @@ function change(obj){
         $(".tit_span").text("用户注册");
     }
 }
+
+function change2(obj){
+    if($(obj).attr('class')=='banner_title2')
+    { $("#sAdminLogin").hide();
+        $(".banner_title").removeClass("blue");
+        $("#hAdminLogin").show();
+        $(".banner_title2").addClass("blue");
+        $(".tit_span").text("医院管理员登录");
+    }
+    if($(obj).attr('class')=='banner_title')
+    { $("#hAdminLogin").hide();
+        $(".banner_title2").removeClass("blue");
+        $("#sAdminLogin").show();
+        $(".banner_title").addClass("blue");
+        $(".tit_span").text("系统管理员登录");
+    }
+}
 //function settingchange(){
 //   $(".account_list").delegate('li', 'click', function() {
 //
