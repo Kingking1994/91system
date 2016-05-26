@@ -44,7 +44,8 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info_set",results = {
             @Result(name = "success",location = "../userInfo.jsp"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp"),
+            @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
     })
     public String infoSet(){
         try {
@@ -65,7 +66,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);
@@ -81,7 +82,8 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info_save",results = {
             @Result(name = "success",location = "/users/info" ,type = "redirect"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp"),
+            @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
     })
     public String infoSaveOrUpdate(){
         try {
@@ -139,7 +141,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);
@@ -155,7 +157,8 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
      */
     @Action(value = "info",results = {
             @Result(name = "success",location = "../userInfo.jsp"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp"),
+            @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
     })
     public String infoShow(){
         try {
@@ -173,7 +176,7 @@ public class UserInfoAction extends SuperAction implements ModelDriven<UserInfo>
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);

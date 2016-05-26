@@ -42,12 +42,14 @@ public class WalletAction extends SuperAction {
             //交易记录
             @Action(value = "trade",results = {
                     @Result(name = "success",location = "../trade.jsp"),
-                    @Result(name = "failure",location = "../errorMsg.jsp")
+                    @Result(name = "failure",location = "../errorMsg.jsp"),
+                    @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
             }),
             //退款记录
             @Action(value = "refund",results = {
                     @Result(name = "success",location = "../refund.jsp"),
-                    @Result(name = "failure",location = "../errorMsg.jsp")
+                    @Result(name = "failure",location = "../errorMsg.jsp"),
+                    @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
             })
     })
     public String wallet(){
@@ -66,7 +68,7 @@ public class WalletAction extends SuperAction {
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);
@@ -82,7 +84,8 @@ public class WalletAction extends SuperAction {
      */
     @Action(value = "recharge",results = {
             @Result(name = "success",location = "/wallets/trade" ,type = "redirect"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp"),
+            @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
     })
     public String recharge(){
         try {
@@ -103,7 +106,7 @@ public class WalletAction extends SuperAction {
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);

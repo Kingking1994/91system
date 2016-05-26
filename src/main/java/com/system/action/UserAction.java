@@ -42,7 +42,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "register",results = {
             @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
-            @Result(name = "failure",location = "../errorMsg.jsp" )
+            @Result(name = "failure",location = "/home/welcomeUser",type = "redirect" )
     })
     public String userRegister(){
         try{
@@ -83,7 +83,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "login",results = {
             @Result(name = "success",location = "/hospitals/list" ,type = "redirect"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "/home/welcomeUser",type = "redirect")
     })
     public String userLogin(){
         try {
@@ -148,7 +148,8 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
      */
     @Action(value = "password",results = {
             @Result(name = "success",location = "../reset_pwd_success.jsp"),
-            @Result(name = "failure",location = "../errorMsg.jsp")
+            @Result(name = "failure",location = "../errorMsg.jsp"),
+            @Result(name = "loginError",location = "/home/welcomeUser",type = "redirect")
     })
     public String userPwd(){
         try {
@@ -180,7 +181,7 @@ public class UserAction extends SuperAction implements ModelDriven<User>{
             }else{
                 LOGGER.warn("用户没有登录");
                 session.setAttribute("errorMsg",new ErrorMsg(102,"用户没有登录"));
-                return "failure";
+                return "loginError";
             }
         }catch (Exception e){
             LOGGER.error(e);
