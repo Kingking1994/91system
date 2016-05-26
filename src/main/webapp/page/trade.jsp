@@ -99,7 +99,7 @@
 	    <!--用户信息-->
 		<div class="user_info">
 			<div class="user_info_img fl">
-				<img src="http://static.91160.com/usercenter/style/global/avatar_0.png">
+				<img src="../images/user.jpg">
 			</div>
 			<div class="user_info_name fl">
 				<c:if test="${identify eq 1}">
