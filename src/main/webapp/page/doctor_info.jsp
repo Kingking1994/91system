@@ -135,7 +135,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt today.getTime() && (schedule.date.getTime() + 86400000) gt today.getTime()}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -144,7 +149,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -153,7 +163,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*2) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*2)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -162,7 +177,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*3) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*3)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -171,7 +191,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*4) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*4)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -180,7 +205,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*5) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*5)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -189,7 +219,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 0}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*6) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*6)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -201,7 +236,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*0) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*0)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -210,7 +250,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*1) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*1)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -219,7 +264,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*2) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*2)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -228,7 +278,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*3) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*3)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -237,7 +292,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*4) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*4)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -246,7 +306,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*5) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*5)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -255,7 +320,12 @@
 							<c:forEach items="${scheduleSet}" var="schedule">
 								<c:if test="${schedule.time eq 1}">
 									<c:if test="${schedule.date.getTime() lt (today.getTime() +86400000*6) && (schedule.date.getTime() + 86400000) gt (today.getTime() +86400000*6)}">
-										<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										<c:if test="${schedule.num gt schedule.ordernum}">
+											<a href="<%=path%>/orders/order?sid=${schedule.sid}">预约</a>
+										</c:if>
+										<c:if test="${schedule.num eq schedule.ordernum}">
+											已约满
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
