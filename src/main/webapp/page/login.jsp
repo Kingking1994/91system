@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
             </ul>
         </form>
-        <div><span>${errorMsg}</span></div>
+        <div><span>${errorMsg.message}</span></div>
     </div>
     <div class="content" style="display: none;" id="login">
         <form autocomplete="on" action="<%=path%>/users/login" method="post">
@@ -66,6 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
             </ul>
         </form>
+        <div><span>${errorMsg.message}</span></div>
     </div>
 </div>
 </body>
