@@ -42,7 +42,7 @@ public class Hospital implements Serializable{
     private int type;
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinColumn(name = "hid")
+    @JoinColumn(name = "hid",updatable = false)
     private Set<Office> officeSet;
 
     public Hospital() {
