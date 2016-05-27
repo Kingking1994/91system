@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/sAdmin/hAdmin")
+@Namespace("/sAdmin")
 public class SAdmin2HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
 
     private HAdmin hAdmin = new HAdmin();
@@ -35,8 +35,8 @@ public class SAdmin2HAdminAction extends SuperAction implements ModelDriven<HAdm
      * 获取医院管理员列表
      * @return
      */
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hAdmin_list",results = {
+            @Result(name = "success",location = "../a_s_ha_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hAdmin_list(){
@@ -62,8 +62,8 @@ public class SAdmin2HAdminAction extends SuperAction implements ModelDriven<HAdm
      * 添加医院管理员
      * @return
      */
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hAdmin_add",results = {
+            @Result(name = "success",location = "/sAdmin/hAdmin_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hAdmin_add(){
@@ -107,8 +107,8 @@ public class SAdmin2HAdminAction extends SuperAction implements ModelDriven<HAdm
      * 删除医院管理员
      * @return
      */
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hAdmin_delete",results = {
+            @Result(name = "success",location = "/sAdmin/hAdmin_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hAdmin_delete(){

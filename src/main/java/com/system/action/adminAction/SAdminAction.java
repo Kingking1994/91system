@@ -29,7 +29,7 @@ public class SAdminAction extends SuperAction implements ModelDriven<SAdmin>{
     private SAdminService sAdminService;
 
     @Action(value = "login",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "/sAdmin/hAdmin_list" ,type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String login(){
@@ -57,7 +57,7 @@ public class SAdminAction extends SuperAction implements ModelDriven<SAdmin>{
     }
 
     @Action(value = "logout",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../adminLogin.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String logout(){
@@ -79,7 +79,7 @@ public class SAdminAction extends SuperAction implements ModelDriven<SAdmin>{
      * @return
      */
     @Action(value = "password",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../a_s_pwd_success.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String reset_password(){

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/sAdmin/sAdmin")
+@Namespace("/sAdmin")
 public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdmin>{
 
     private SAdmin sAdmin = new SAdmin();
@@ -35,8 +35,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      * 获得系统管理员列表
      * @return
      */
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "sAdmin_list",results = {
+            @Result(name = "success",location = "../a_s_sa_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String sAdmin_list(){
@@ -70,8 +70,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      * 添加系统管理员
      * @return
      */
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "sAdmin_add",results = {
+            @Result(name = "success",location = "/sAdmin/sAdmin_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String sAdmin_add(){
@@ -117,8 +117,8 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      * 删除系统管理员
      * @return
      */
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "sAdmin_delete",results = {
+            @Result(name = "success",location = "/sAdmin/sAdmin_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String sAdmin_delete(){
