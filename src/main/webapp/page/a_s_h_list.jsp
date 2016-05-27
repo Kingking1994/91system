@@ -128,7 +128,7 @@
         <div class="right_title title">
     		<span>医院管理</span>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="font-size: 20px" href="<%=path%>/page/a_s_h_detail.jsp"><button>添加</button></a>
+			<a style="font-size: 20px" href="<%=path%>/page/a_s_h_add.jsp"><button>添加</button></a>
     	</div>
       <div class="right_content">
        <div class="order order_list" id="order_list" >
