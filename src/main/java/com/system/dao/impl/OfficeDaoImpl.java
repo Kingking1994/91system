@@ -98,6 +98,7 @@ public class OfficeDaoImpl implements OfficeDao{
             String name = searchModel.getName();
             int level= searchModel.getLevel();
             int type = searchModel.getType();
+            int hid = searchModel.getHid();
 
             if(StrUtil.isNotBlank(name)){
                 hql.append(" and name like :name");
@@ -113,6 +114,11 @@ public class OfficeDaoImpl implements OfficeDao{
                 hql.append(" and type = :type");
                 countHql.append(" and type = :type");
                 paramMap.put("type",type);
+            }
+            if(hid != 0){
+                hql.append(" and hid = :hid");
+                countHql.append(" and hid = :hid");
+                paramMap.put("hid",hid);
             }
         }
 
