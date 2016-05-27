@@ -63,7 +63,7 @@ public class HAdminDaoImpl implements HAdminDao {
     }
 
     public HAdmin findByAccount(String account) {
-        StringBuilder hql = new StringBuilder("from HAdmin where account = "+ account);
+        StringBuilder hql = new StringBuilder("from HAdmin where account = "+ "'" + account + "'");
         HAdmin hAdmin = (HAdmin)this.getCurrentSession().createQuery(hql.toString()).uniqueResult();
         return hAdmin;
     }
