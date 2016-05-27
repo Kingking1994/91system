@@ -18,4 +18,11 @@ public class WelcomeAction extends SuperAction {
     public String welcomeUser(){
         return "success";
     }
+
+    @Action(value = "welcomeAdmin" ,results = {
+            @Result(name = "success",location = "../adminLogin.jsp")
+    })
+    public String welcomeAdmin(){
+        return "success";
+    }
 }
