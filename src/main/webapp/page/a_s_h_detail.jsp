@@ -98,7 +98,7 @@
 					  </tr>
 					  <tr>
 						  <td>intro：</td>
-						  <td><input name="intro" value="${hospital.intro}"/></td>
+						  <td><textarea  name="intro" >${hospital.intro}</textarea></td>
 					  </tr>
 					  <tr>
 						  <td>quality：</td>
