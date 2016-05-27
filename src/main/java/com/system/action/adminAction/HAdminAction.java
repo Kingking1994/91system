@@ -30,7 +30,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
 
 
     @Action(value = "login",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String login(){
@@ -40,6 +40,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
                 if(tmp.getPassword().equals(hAdmin.getPassword())){
                     LOGGER.info("登录成功");
                     session.setAttribute("h_account",tmp.getAccount());
+                    session.setAttribute("hid",tmp.getHid());
                     return "success";
                 }else{
                     LOGGER.warn("密码不正确");
@@ -58,7 +59,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
     }
 
     @Action(value = "logout",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../adminLogin.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String logout(){
@@ -80,7 +81,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
      * @return
      */
     @Action(value = "password",results = {
-            @Result(name = "success",location = "success.jsp"),
+            @Result(name = "success",location = "../a_h_pwd_success.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String reset_password(){

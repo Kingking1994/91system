@@ -2,10 +2,12 @@ package com.system.action.adminAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
+import com.system.entity.Hospital;
 import com.system.entity.Pager;
 import com.system.entity.Schedule;
 import com.system.enums.Constant;
 import com.system.service.HAdminService;
+import com.system.service.HospitalService;
 import com.system.service.ScheduleService;
 import com.system.util.BeanUtil;
 import com.system.util.StrUtil;
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/hAdmin/schedule")
+@Namespace("/hAdmin")
 public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Schedule>{
 
     private Schedule scheduleModel = new Schedule();
@@ -30,16 +32,19 @@ public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Sc
     @Autowired
     private ScheduleService scheduleService;
 
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Autowired
+    private HospitalService hospitalService;
+
+    @Action(value = "schedule_list",results = {
+            @Result(name = "success",location = "../a_h_s_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String schedule_list(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
-                List<Schedule> scheduleList = scheduleService.findAll();
-                LOGGER.info(scheduleList);
-                session.setAttribute("result",scheduleList);
+                Hospital hospital = hospitalService.get((Integer)session.getAttribute("hid"));
+                LOGGER.info(hospital);
+                session.setAttribute("result",hospital);
                 return "success";
             }else{
                 LOGGER.warn("还没有登录");
@@ -52,35 +57,9 @@ public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Sc
         }
     }
 
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
-    })
-    public String schedule_add(){
-        try {
-            if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
-                if(BeanUtil.nonNull(scheduleModel)){
-                    LOGGER.info(scheduleModel);
-                    scheduleService.save(scheduleModel);
-                    return "success";
-                }else{
-                    LOGGER.warn("参数为 null");
-                    session.setAttribute("errorMsg","参数为 null");
-                    return "failure";
-                }
-            }else{
-                LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
-                return "failure";
-            }
-        }catch (Exception e){
-            LOGGER.error(e);
-            return "failure";
-        }
-    }
 
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "schedule_delete",results = {
+            @Result(name = "success",location = "/hAdmin/schedule_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String schedule_delete(){
@@ -108,8 +87,8 @@ public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Sc
         }
     }
 
-    @Action(value = "update",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "schedule_update",results = {
+            @Result(name = "success",location = "../a_h_s_detail.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String schedule_update_step1(){
@@ -138,8 +117,8 @@ public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Sc
         }
     }
 
-    @Action(value = "save",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "schedule_save",results = {
+            @Result(name = "success",location = "/hAdmin/schedule_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String schedule_update_step2(){
@@ -147,7 +126,11 @@ public class HAdmin2ScheduleAction extends SuperAction implements ModelDriven<Sc
             if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
                 if(BeanUtil.nonNull(scheduleModel)){
                     LOGGER.info(scheduleModel);
-                    scheduleService.saveOrUpdate(scheduleModel);
+                    if(scheduleModel.getSid() == 0){
+                        scheduleService.save(scheduleModel);
+                    }else{
+                        scheduleService.saveOrUpdate(scheduleModel);
+                    }
                     return "success";
                 }else{
                     LOGGER.warn("参数为 null");

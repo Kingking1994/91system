@@ -3,10 +3,12 @@ package com.system.action.adminAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
 import com.system.entity.Doctor;
+import com.system.entity.Hospital;
 import com.system.entity.Pager;
 import com.system.enums.Constant;
 import com.system.service.DoctorService;
 import com.system.service.HAdminService;
+import com.system.service.HospitalService;
 import com.system.util.BeanUtil;
 import com.system.util.StrUtil;
 import org.apache.log4j.Logger;
@@ -18,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/hAdmin/doctor")
+@Namespace("/hAdmin")
 public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doctor>{
 
     private Doctor doctorModel = new Doctor();
@@ -28,22 +30,20 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private HospitalService hospitalService;
 
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+
+    @Action(value = "doctor_list",results = {
+            @Result(name = "success",location = "../a_h_d_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String doctor_list(){
         try {
             if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
-                String pageNumString = request.getParameter("pageNum");
-                int pageNum = 1;//设置默认页数
-                if(StrUtil.isNum(pageNumString)){//如果是非法是字符串，则使用默认页数
-                    pageNum = Integer.parseInt(pageNumString);
-                }
-                Pager<Doctor> doctorPager = doctorService.findDoctor(doctorModel, pageNum, Constant.DEAULT_PAGE_SIZE);
-                LOGGER.info(doctorPager);
-                session.setAttribute("result",doctorPager);
+                Hospital hospital = hospitalService.get((Integer)session.getAttribute("hid"));
+                LOGGER.info(hospital);
+                session.setAttribute("result",hospital);
                 return "success";
             }else{
                 LOGGER.warn("还没有登录");
@@ -57,35 +57,9 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
     }
 
 
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
-    })
-    public String doctor_add(){
-        try {
-            if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
-                if(BeanUtil.nonNull(doctorModel)){
-                    LOGGER.info(doctorModel);
-                    doctorService.save(doctorModel);
-                    return "success";
-                }else{
-                    LOGGER.warn("参数为 null");
-                    session.setAttribute("errorMsg","参数为 null");
-                    return "failure";
-                }
-            }else{
-                LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
-                return "failure";
-            }
-        }catch (Exception e){
-            LOGGER.error(e);
-            return "failure";
-        }
-    }
 
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "doctor_delete",results = {
+            @Result(name = "success",location = "/hAdmin/doctor_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String doctor_delete(){
@@ -113,8 +87,8 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
         }
     }
 
-    @Action(value = "update",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "doctor_update",results = {
+            @Result(name = "success",location = "../a_h_d_detail.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String doctor_update_step1(){
@@ -143,8 +117,8 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
         }
     }
 
-    @Action(value = "save",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "doctor_save",results = {
+            @Result(name = "success",location = "/hAdmin/doctor_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String doctor_update_step2(){
@@ -152,7 +126,11 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
             if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
                 if(BeanUtil.nonNull(doctorModel)){
                     LOGGER.info(doctorModel);
-                    doctorService.saveOrUpdate(doctorModel);
+                    if(doctorModel.getDid() == 0){
+                        doctorService.save(doctorModel);
+                    }else{
+                        doctorService.saveOrUpdate(doctorModel);
+                    }
                     return "success";
                 }else{
                     LOGGER.warn("参数为 null");

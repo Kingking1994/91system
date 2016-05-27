@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/hAdmin/office")
+@Namespace("/hAdmin")
 public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Office>{
 
     private Office officeModel = new Office();
@@ -29,8 +29,8 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
     private OfficeService officeService;
 
 
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "office_list",results = {
+            @Result(name = "success",location = "../a_h_o_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String office_list(){
@@ -41,6 +41,7 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
                 if(StrUtil.isNum(pageNumString)){//如果是非法是字符串，则使用默认页数
                     pageNum = Integer.parseInt(pageNumString);
                 }
+                officeModel.setHid((Integer)session.getAttribute("hid"));//找到该医院下的所有科室
                 Pager<Office> officePager = officeService.findOffice(officeModel,pageNum, Constant.DEAULT_PAGE_SIZE);
                 LOGGER.info(officePager);
                 session.setAttribute("result",officePager);
@@ -56,35 +57,8 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
         }
     }
 
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
-    })
-    public String office_add(){
-        try {
-            if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
-                if(BeanUtil.nonNull(officeModel)){
-                    LOGGER.info(officeModel);
-                    officeService.save(officeModel);
-                    return "success";
-                }else{
-                    LOGGER.warn("参数为 null");
-                    session.setAttribute("errorMsg","参数为 null");
-                    return "failure";
-                }
-            }else{
-                LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
-                return "failure";
-            }
-        }catch (Exception e){
-            LOGGER.error(e);
-            return "failure";
-        }
-    }
-
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "office_delete",results = {
+            @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String office_delete(){
@@ -112,8 +86,8 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
         }
     }
 
-    @Action(value = "update",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "office_update",results = {
+            @Result(name = "success",location = "../a_h_o_detail.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String office_update_step1(){
@@ -142,8 +116,8 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
         }
     }
 
-    @Action(value = "save",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "office_save",results = {
+            @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String office_update_step2(){
@@ -151,7 +125,12 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
             if(StrUtil.isNotBlank((String) session.getAttribute("h_account"))){
                 if(BeanUtil.nonNull(officeModel)){
                     LOGGER.info(officeModel);
-                    officeService.saveOrUpdate(officeModel);
+                    if(officeModel.getOid() == 0){
+                        officeModel.setHid((Integer) session.getAttribute("hid"));
+                        officeService.save(officeModel);
+                    }else {
+                        officeService.saveOrUpdate(officeModel);
+                    }
                     return "success";
                 }else{
                     LOGGER.warn("参数为 null");
