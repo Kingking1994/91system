@@ -38,7 +38,7 @@ public class Doctor implements Serializable {
     private int oid;
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinColumn(name = "did")
+    @JoinColumn(name = "did",updatable = false)
     private Set<Schedule> scheduleSet;
 
     public Doctor() {

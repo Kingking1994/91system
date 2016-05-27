@@ -30,7 +30,7 @@ public class Office implements Serializable {
     private int hid;
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinColumn(name = "oid")
+    @JoinColumn(name = "oid",updatable = false)
     private Set<Doctor> doctorSet;
 
     public Office() {

@@ -36,7 +36,7 @@ public class Schedule implements Serializable {
     private int did;
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinColumn(name = "sid")
+    @JoinColumn(name = "sid",updatable = false)
     private Set<OrderItem> orderItemSet;
 
 
