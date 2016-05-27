@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by king on 2016/5/15.
  */
-@Namespace("/sAdmin/hospital")
+@Namespace("/sAdmin")
 public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Hospital>{
 
     private Hospital hospitalModel = new Hospital();
@@ -31,8 +31,8 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
     private HospitalService hospitalService;
 
 
-    @Action(value = "list",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hospital_list",results = {
+            @Result(name = "success",location = "../a_s_h_list.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hospital_list(){
@@ -58,8 +58,8 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
         }
     }
 
-    @Action(value = "delete",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hospital_delete",results = {
+            @Result(name = "success",location = "/sAdmin/hospital_list" , type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hospital_delete(){
@@ -87,36 +87,9 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
         }
     }
 
-    @Action(value = "add",results = {
-            @Result(name = "success",location = "success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
-    })
-    public String hospital_add(){
-        try {
-            if(StrUtil.isNotBlank((String) session.getAttribute("s_account"))){
-                if(BeanUtil.nonNull(hospitalModel)){
-                    LOGGER.info(hospitalModel);
-                    hospitalService.save(hospitalModel);
-                    return "success";
-                }else{
-                    LOGGER.warn("参数为null");
-                    session.setAttribute("errorMsg","参数为null");
-                    return "failure";
-                }
-            }else{
-                LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
-                return "failure";
-            }
-        }catch (Exception e){
-            LOGGER.error(e);
-            return "failure";
-        }
-    }
 
-
-    @Action(value = "update",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hospital_update",results = {
+            @Result(name = "success",location = "../a_s_h_detail.jsp"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hospital_update_step1(){
@@ -146,8 +119,8 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
     }
 
 
-    @Action(value = "save",results = {
-            @Result(name = "success",location = "success.jsp"),
+    @Action(value = "hospital_save",results = {
+            @Result(name = "success",location = "/sAdmin/hospital_list" , type = "redirect"),
             @Result(name = "failure",location = "failure.jsp")
     })
     public String hospital_update_step2(){
@@ -155,7 +128,11 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
             if(StrUtil.isNotBlank((String) session.getAttribute("s_account"))){
                 if(BeanUtil.nonNull(hospitalModel)){
                     LOGGER.info(hospitalModel);
-                    hospitalService.saveOrUpdate(hospitalModel);
+                    if(hospitalModel.getHid() == 0){
+                        hospitalService.save(hospitalModel);
+                    }else{
+                        hospitalService.saveOrUpdate(hospitalModel);
+                    }
                     return "success";
                 }else{
                     LOGGER.warn("参数为null");
