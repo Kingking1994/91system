@@ -3,6 +3,7 @@ package com.system.action.adminAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
 import com.system.entity.Doctor;
+import com.system.entity.ErrorMsg;
 import com.system.entity.Hospital;
 import com.system.entity.Pager;
 import com.system.enums.Constant;
@@ -36,7 +37,7 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
 
     @Action(value = "doctor_list",results = {
             @Result(name = "success",location = "../a_h_d_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String doctor_list(){
         try {
@@ -47,11 +48,12 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
                 return "success";
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -60,7 +62,7 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
 
     @Action(value = "doctor_delete",results = {
             @Result(name = "success",location = "/hAdmin/doctor_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String doctor_delete(){
         try {
@@ -73,23 +75,24 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "doctor_update",results = {
             @Result(name = "success",location = "../a_h_d_detail.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String doctor_update_step1(){
         try {
@@ -103,23 +106,24 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "doctor_save",results = {
             @Result(name = "success",location = "/hAdmin/doctor_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String doctor_update_step2(){
         try {
@@ -134,16 +138,17 @@ public class HAdmin2DoctorAction extends SuperAction implements ModelDriven<Doct
                     return "success";
                 }else{
                     LOGGER.warn("参数为 null");
-                    session.setAttribute("errorMsg","参数为 null");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

@@ -2,6 +2,7 @@ package com.system.action.adminAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
+import com.system.entity.ErrorMsg;
 import com.system.entity.Hospital;
 import com.system.entity.Pager;
 import com.system.enums.Constant;
@@ -33,7 +34,7 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
 
     @Action(value = "hospital_list",results = {
             @Result(name = "success",location = "../a_s_h_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String hospital_list(){
         try {
@@ -49,18 +50,19 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
                 return "success";
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "hospital_delete",results = {
             @Result(name = "success",location = "/sAdmin/hospital_list" , type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String hospital_delete(){
         try {
@@ -73,16 +75,17 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -90,7 +93,7 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
 
     @Action(value = "hospital_update",results = {
             @Result(name = "success",location = "../a_s_h_detail.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String hospital_update_step1(){
         try {
@@ -104,16 +107,17 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -121,7 +125,7 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
 
     @Action(value = "hospital_save",results = {
             @Result(name = "success",location = "/sAdmin/hospital_list" , type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String hospital_update_step2(){
         try {
@@ -136,16 +140,17 @@ public class SAdmin2HospitalAction extends SuperAction implements ModelDriven<Ho
                     return "success";
                 }else{
                     LOGGER.warn("参数为null");
-                    session.setAttribute("errorMsg","参数为null");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

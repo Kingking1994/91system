@@ -2,6 +2,7 @@ package com.system.action.adminAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
+import com.system.entity.ErrorMsg;
 import com.system.entity.Office;
 import com.system.entity.Pager;
 import com.system.enums.Constant;
@@ -31,7 +32,7 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
 
     @Action(value = "office_list",results = {
             @Result(name = "success",location = "../a_h_o_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String office_list(){
         try {
@@ -48,18 +49,19 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
                 return "success";
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "office_delete",results = {
             @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String office_delete(){
         try {
@@ -72,23 +74,24 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "office_update",results = {
             @Result(name = "success",location = "../a_h_o_detail.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String office_update_step1(){
         try {
@@ -102,23 +105,24 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
                     return "success";
                 }else{
                     LOGGER.warn("非法的输入");
-                    session.setAttribute("errorMsg","非法的输入");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "office_save",results = {
             @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String office_update_step2(){
         try {
@@ -134,16 +138,17 @@ public class HAdmin2OfficeAction extends SuperAction implements ModelDriven<Offi
                     return "success";
                 }else{
                     LOGGER.warn("参数为 null");
-                    session.setAttribute("errorMsg","参数为 null");
+                    session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

@@ -2,6 +2,7 @@ package com.system.action.adminAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
+import com.system.entity.ErrorMsg;
 import com.system.entity.HAdmin;
 import com.system.service.HAdminService;
 import com.system.util.BeanUtil;
@@ -31,7 +32,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
 
     @Action(value = "login",results = {
             @Result(name = "success",location = "/hAdmin/office_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "/home/welcomeAdmin" ,type = "redirect")
     })
     public String login(){
         try {
@@ -44,23 +45,24 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
                     return "success";
                 }else{
                     LOGGER.warn("密码不正确");
-                    session.setAttribute("errorMsg","密码不正确");
+                    session.setAttribute("errorMsg",new ErrorMsg(111,"密码不正确"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("改管理员不存在");
-                session.setAttribute("errorMsg","改管理员不存在");
+                session.setAttribute("errorMsg",new ErrorMsg(112,"该管理员不存在"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
 
     @Action(value = "logout",results = {
             @Result(name = "success",location = "../adminLogin.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String logout(){
         try {
@@ -72,6 +74,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
             return "success";
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -82,7 +85,7 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
      */
     @Action(value = "password",results = {
             @Result(name = "success",location = "../a_h_pwd_success.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_h_errorMsg.jsp")
     })
     public String reset_password(){
         try {
@@ -95,21 +98,22 @@ public class HAdminAction extends SuperAction implements ModelDriven<HAdmin>{
                         return "success";
                     }else{
                         LOGGER.warn("新密码不规范");
-                        session.setAttribute("errorMsg","新密码不规范");
+                        session.setAttribute("errorMsg",new ErrorMsg(107,"密码格式不对"));
                         return "failure";
                     }
                 }else{
                     LOGGER.warn("原密码不正确");
-                    session.setAttribute("errorMsg","原密码不正确");
+                    session.setAttribute("errorMsg",new ErrorMsg(111,"密码不正确"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("还没有登录");
-                session.setAttribute("errorMsg","还没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }

@@ -2,6 +2,7 @@ package com.system.action.adminAction;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.system.action.SuperAction;
+import com.system.entity.ErrorMsg;
 import com.system.entity.SAdmin;
 import com.system.enums.SAdminIsrootEnum;
 import com.system.service.SAdminService;
@@ -37,7 +38,7 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      */
     @Action(value = "sAdmin_list",results = {
             @Result(name = "success",location = "../a_s_sa_list.jsp"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String sAdmin_list(){
         try {
@@ -50,16 +51,17 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
                     return "success";
                 }else{
                     LOGGER.warn("该管理员没有权限");
-                    session.setAttribute("errorMsg","该管理员没有权限");
+                    session.setAttribute("errorMsg",new ErrorMsg(113,"该管理员没有权限"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -72,7 +74,7 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      */
     @Action(value = "sAdmin_add",results = {
             @Result(name = "success",location = "/sAdmin/sAdmin_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String sAdmin_add(){
         try {
@@ -87,26 +89,27 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
                             return "success";
                         }else{
                             LOGGER.warn("该密码不合规范");
-                            session.setAttribute("errorMsg","该密码不合规范");
+                            session.setAttribute("errorMsg",new ErrorMsg(107,"密码格式不对"));
                             return "failure";
                         }
                     }else{
                         LOGGER.warn("该账号已经存在");
-                        session.setAttribute("errorMsg","该账号已经存在");
+                        session.setAttribute("errorMsg",new ErrorMsg(114,"该账号已经存在"));
                         return "failure";
                     }
                 }else{
                     LOGGER.warn("该管理员没有权限");
-                    session.setAttribute("errorMsg","该管理员没有权限");
+                    session.setAttribute("errorMsg",new ErrorMsg(113,"该管理员没有权限"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
@@ -119,7 +122,7 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
      */
     @Action(value = "sAdmin_delete",results = {
             @Result(name = "success",location = "/sAdmin/sAdmin_list",type = "redirect"),
-            @Result(name = "failure",location = "failure.jsp")
+            @Result(name = "failure",location = "../a_s_errorMsg.jsp")
     })
     public String sAdmin_delete(){
         try {
@@ -134,26 +137,27 @@ public class SAdmin2SAdminAction extends SuperAction implements ModelDriven<SAdm
                             return "success";
                         }else{
                             LOGGER.warn("超级管理员无法被删除");
-                            session.setAttribute("errorMsg","超级管理员无法被删除");
+                            session.setAttribute("errorMsg",new ErrorMsg(115,"超级管理员无法被删除"));
                             return "failure";
                         }
                     }else{
                         LOGGER.warn("非法的输入");
-                        session.setAttribute("errorMsg","非法的输入");
+                        session.setAttribute("errorMsg",new ErrorMsg(101,"非法的参数输入"));
                         return "failure";
                     }
                 }else{
                     LOGGER.warn("该管理员没有权限");
-                    session.setAttribute("errorMsg","该管理员没有权限");
+                    session.setAttribute("errorMsg",new ErrorMsg(113,"该管理员没有权限"));
                     return "failure";
                 }
             }else{
                 LOGGER.warn("该管理员没有登录");
-                session.setAttribute("errorMsg","该管理员没有登录");
+                session.setAttribute("errorMsg",new ErrorMsg(116,"管理员没有登录"));
                 return "failure";
             }
         }catch (Exception e){
             LOGGER.error(e);
+            session.setAttribute("errorMsg",new ErrorMsg(100,"系统内部异常"));
             return "failure";
         }
     }
